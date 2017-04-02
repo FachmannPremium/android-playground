@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Kalkulator BMI</string>
+    <string name="label_ask_mass">Podaj swoją wagę:</string>
+    <string name="label_ask_heigth">Podaj swój wzrost:</string>
+    <string name="height">Wzrost</string>
+    <string name="mass">Waga</string>
+
+    <string name="unit_change">Zmień jednostki</string>
+    <string name="unit_metric">Metryczne</string>
+    <string name="unit_kg">kg</string>
+    <string name="unit_cm">cm</string>
+    <string name="unit_imperial">Imperialne</string>
+    <string name="unit_lb">lb</string>
+    <string name="unit_ft">ft</string>
+    <string name="about">O programie</string>
+
+    <string name="intro_yours_bmi">Twoje BMI:</string>
+    <string name="intro_eval">Oblicz</string>
+    <string name="intro_check_value">Podaj prawidłową masę/wagę</string>
+    <string name="intro_check_numers">Podaj liczbę rzeczywistą</string>
+
+
+
+</resources>
