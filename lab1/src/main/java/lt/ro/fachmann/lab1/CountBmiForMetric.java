@@ -1,14 +1,14 @@
 package lt.ro.fachmann.lab1;
 
 /**
- * Created by bartl on 28.03.2017.
+ * Created by stud on 20.03.2017.
  */
 
-public class CountBmiForLbFt implements CountBmi {
-    public static final float MIN_MASS = 22.05f;
-    public static final float MAX_MASS = 551.16f;
-    public static final float MIN_HEIGHT = 1.64f;
-    public static final float MAX_HEIGHT = 8.20f;
+public class CountBmiForMetric implements CountBmi {
+    public static final float MIN_MASS = 10f;
+    public static final float MAX_MASS = 250f;
+    public static final float MIN_HEIGHT = 50f;
+    public static final float MAX_HEIGHT = 250f;
 
     @Override
     public boolean isValidMass(float mass) {
@@ -22,6 +22,7 @@ public class CountBmiForLbFt implements CountBmi {
 
     @Override
     public float countBMI(float mass, float height) {
+        height /= 100;
         if (isValidMass(mass) || isValidHeight(height)) {
             return mass / (height * height);
         } else {

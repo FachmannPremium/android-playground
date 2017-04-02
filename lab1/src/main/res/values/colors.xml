@@ -2,7 +2,15 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#d94a7a</color>
-    <color name="colorBackground">#ffdde8</color>
-    <color name="colorActive">#c1392b</color>
+    <color name="colorAccent">#ec407a</color>
+    <color name="colorBackground">#fce4ec</color>
+    <color name="colorActive">#c62828</color>
+
+    <color name="colorGoodInput">#757575</color>
+    <color name="colorWrongInput">#d50000</color>
+
+    <color name="bmiUnderweight">#26a69a</color>
+    <color name="bmiNorm">#1b5e20</color>
+    <color name="bmiOverweight">#f57f17</color>
+    <color name="bmiObesity">#b71c1c</color>
 </resources>

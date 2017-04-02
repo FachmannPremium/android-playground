@@ -16,8 +16,8 @@ public final class CountBmiFactory {
 
     static {
         bmiMap = new HashMap<>(2);
-        bmiMap.put(CountBmiUnit.METRIC, new CountBmiForKgCm());
-        bmiMap.put(CountBmiUnit.IMPERIAL, new CountBmiForLbFt());
+        bmiMap.put(CountBmiUnit.METRIC, new CountBmiForMetric());
+        bmiMap.put(CountBmiUnit.IMPERIAL, new CountBmiForImperial());
     }
 
     public static CountBmi getInstance() {

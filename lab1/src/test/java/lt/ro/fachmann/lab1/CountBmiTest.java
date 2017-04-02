@@ -16,7 +16,7 @@ public class CountBmiTest {
         // GIVEN
         float textMan = -1.0f;
         // WHEN
-        CountBmi countBmi = new CountBmiForKgCm();
+        CountBmi countBmi = new CountBmiForMetric();
         // THEN
         boolean anchor = countBmi.isValidMass(textMan);
         assertFalse(anchor);
@@ -29,7 +29,7 @@ public class CountBmiTest {
         float inRange = 75f;
         float over = 3000f;
         // WHEN
-        CountBmi countBmi = new CountBmiForKgCm();
+        CountBmi countBmi = new CountBmiForMetric();
         // THEN
         assertFalse(countBmi.isValidMass(under));
         assertTrue(countBmi.isValidMass(inRange));
@@ -41,7 +41,7 @@ public class CountBmiTest {
         // GIVEN
         float textMan = -1.0f;
         // WHEN
-        CountBmi countBmi = new CountBmiForKgCm();
+        CountBmi countBmi = new CountBmiForMetric();
         // THEN
         boolean anchor = countBmi.isValidHeight(textMan);
         assertFalse(anchor);
@@ -54,7 +54,7 @@ public class CountBmiTest {
         float inRange = 1.7f;
         float over = 5f;
         // WHEN
-        CountBmi countBmi = new CountBmiForKgCm();
+        CountBmi countBmi = new CountBmiForMetric();
         // THEN
         assertFalse(countBmi.isValidHeight(under));
         assertTrue(countBmi.isValidHeight(inRange));
@@ -67,7 +67,7 @@ public class CountBmiTest {
         float mass = 78.0f;
         float height = 1.78f;
         // WHEN
-        CountBmi countBmi = new CountBmiForKgCm();
+        CountBmi countBmi = new CountBmiForMetric();
         // THEN
         float bmi = countBmi.countBMI(mass, height);
         float actual = 78.0f/1.78f/1.78f;

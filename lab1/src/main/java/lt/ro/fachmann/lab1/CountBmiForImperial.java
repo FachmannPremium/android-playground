@@ -1,14 +1,14 @@
 package lt.ro.fachmann.lab1;
 
 /**
- * Created by stud on 20.03.2017.
+ * Created by bartl on 28.03.2017.
  */
 
-public class CountBmiForKgCm implements CountBmi {
-    public static final float MIN_MASS = 10f;
-    public static final float MAX_MASS = 250f;
-    public static final float MIN_HEIGHT = 50f;
-    public static final float MAX_HEIGHT = 250f;
+public class CountBmiForImperial implements CountBmi {
+    public static final float MIN_MASS = 22.05f;
+    public static final float MAX_MASS = 551.16f;
+    public static final float MIN_HEIGHT = 1.64f;
+    public static final float MAX_HEIGHT = 8.20f;
 
     @Override
     public boolean isValidMass(float mass) {

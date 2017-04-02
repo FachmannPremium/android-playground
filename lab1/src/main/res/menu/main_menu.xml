@@ -8,11 +8,9 @@
             <group android:checkableBehavior="single">
                 <item
                     android:id="@+id/menu_use_metric"
-                    android:title="@string/unit_metric"
-                    tools:showAsAction="never" />
+                    android:title="@string/unit_metric"/>
                 <item
                     android:id="@+id/menu_use_imperial"
-                    android:checked="true"
                     android:title="@string/unit_imperial"
                     tools:showAsAction="never" />
             </group>

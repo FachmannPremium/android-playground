@@ -10,13 +10,13 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="lt.ro.fachmann.lab1.BmiCalculator">
+    tools:context="lt.ro.fachmann.lab1.BmiCalculatorActivity">
 
     <TextView
         android:id="@+id/text_ask_mass"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/ask_label_width"
         android:layout_height="@dimen/form_height"
-        android:gravity="center"
+        android:gravity="center|start"
         android:text="@string/label_ask_mass" />
 
     <EditText
@@ -32,10 +32,10 @@
 
     <TextView
         android:id="@+id/text_ask_height"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/ask_label_width"
         android:layout_height="@dimen/form_height"
         android:layout_below="@id/edit_mass"
-        android:gravity="center"
+        android:gravity="center|start"
         android:text="@string/label_ask_heigth" />
 
     <EditText
@@ -44,28 +44,26 @@
         android:layout_height="@dimen/form_height"
         android:layout_alignParentEnd="true"
         android:layout_below="@+id/edit_mass"
-        android:layout_marginLeft="@dimen/intro_input_side_margin"
         android:layout_marginRight="@dimen/intro_input_side_margin"
-        android:layout_toEndOf="@+id/text_ask_height"
         android:hint="@string/height"
-        android:inputType="numberDecimal" />
+        android:inputType="numberDecimal"
+        android:layout_alignStart="@+id/edit_mass" />
 
-    <Button
-        android:id="@+id/button_eval"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/edit_height"
-        android:backgroundTint="@color/colorAccent"
-        android:onClick="countBMI"
-        android:text="@string/intro_eval" />
+    <!--<Button-->
+        <!--android:id="@+id/button_eval"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentEnd="true"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_below="@+id/edit_height"-->
+        <!--android:backgroundTint="@color/colorAccent"-->
+        <!--android:text="@string/intro_eval" />-->
 
     <TextView
         android:id="@+id/text_yours_bmi"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/info_height"
-        android:layout_below="@id/button_eval"
+        android:layout_below="@id/edit_height"
         android:gravity="bottom"
         android:paddingRight="@dimen/intro_spacing"
         android:text="@string/intro_yours_bmi" />
@@ -74,7 +72,7 @@
         android:id="@+id/text_bmi"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/info_height"
-        android:layout_below="@id/button_eval"
+        android:layout_below="@id/edit_height"
         android:layout_toEndOf="@+id/text_yours_bmi"
         android:gravity="center"
         android:textSize="@dimen/font_size_h1" />

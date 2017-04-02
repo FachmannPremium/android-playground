@@ -8,4 +8,17 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+
+    <style name="GoodInput">
+        <item name="android:editTextColor">@color/colorGoodInput</item>
+        <item name="android:textColorHint">@color/colorGoodInput</item>
+        <item name="android:textColor">@color/colorGoodInput</item>
+    </style>
+
+    <style name="WrongInput">
+        <item name="android:editTextColor">@color/colorWrongInput</item>
+        <item name="android:textColorHint">@color/colorWrongInput</item>
+        <item name="android:textColor">@color/colorWrongInput</item>
+    </style>
+
 </resources>

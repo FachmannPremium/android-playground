@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">Kalkulator BMI</string>
-    <string name="label_ask_mass">Podaj swoją wagę:</string>
-    <string name="label_ask_heigth">Podaj swój wzrost:</string>
+
+    <string name="label_ask_mass"><![CDATA[Podaj swoją wagę <i>[%1$s]</i>:]]></string>
+    <string name="label_ask_heigth"><![CDATA[Podaj swój wzrost <i>[%1$s]</i>:]]></string>
+
     <string name="height">Wzrost</string>
     <string name="mass">Waga</string>
 
