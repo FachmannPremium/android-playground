@@ -11,12 +11,14 @@
                     android:title="@string/unit_metric"/>
                 <item
                     android:id="@+id/menu_use_imperial"
-                    android:title="@string/unit_imperial"
-                    tools:showAsAction="never" />
+                    android:title="@string/unit_imperial"/>
             </group>
         </menu>
     </item>
     <item
+        android:id="@+id/menu_save"
+        android:title="@string/intro_menu_save" />
+    <item
         android:id="@+id/menu_about"
-        android:title="@string/about" />
+        android:title="@string/intro_menu_about" />
 </menu>

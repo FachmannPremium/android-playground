@@ -13,14 +13,13 @@
     <string name="unit_cm">cm</string>
     <string name="unit_imperial">Imperialne</string>
     <string name="unit_lb">lb</string>
-    <string name="unit_ft">ft</string>
-    <string name="about">O programie</string>
+    <string name="unit_ft">in</string>
+    <string name="intro_menu_save">Zapisz</string>
+    <string name="intro_menu_about">O programie</string>
 
     <string name="intro_yours_bmi">Twoje BMI:</string>
     <string name="intro_eval">Oblicz</string>
     <string name="intro_check_value">Podaj prawidłową masę/wagę</string>
     <string name="intro_check_numers">Podaj liczbę rzeczywistą</string>
-
-
 
 </resources>

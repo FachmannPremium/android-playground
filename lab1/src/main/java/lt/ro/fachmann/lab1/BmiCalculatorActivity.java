@@ -1,5 +1,8 @@
 package lt.ro.fachmann.lab1;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.TextViewCompat;
@@ -10,6 +13,7 @@ import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,9 +44,11 @@ public class BmiCalculatorActivity extends AppCompatActivity {
     Menu menuUnit;
     MenuItem menuUseMetric;
     MenuItem menuUseImperial;
+    MenuItem menuSave;
+
+    private SharedPreferences sharedPref;
 
     private Toast toast;
-
     private CountBmi countBmi;
     private CountBmiUnit countBmiUnit;
 
@@ -54,8 +60,9 @@ public class BmiCalculatorActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         editMass.addTextChangedListener(textWatcher);
         editHeight.addTextChangedListener(textWatcher);
-        initUnit(CountBmiFactory.getUnit());
+        sharedPref = getPreferences(Context.MODE_PRIVATE);
 
+        load();
     }
 
     @Override
@@ -66,13 +73,17 @@ public class BmiCalculatorActivity extends AppCompatActivity {
         menuUnit = menu;
         menuUseMetric = menu.findItem(R.id.menu_use_metric);
         menuUseImperial = menu.findItem(R.id.menu_use_imperial);
-        initUnit(countBmiUnit);
+        menuSave = menu.findItem(R.id.menu_save);
+        setRadioButtonUnit();
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.menu_save:
+                save();
+                return true;
             case R.id.menu_about:
                 return true;
             case R.id.menu_use_metric:
@@ -86,32 +97,70 @@ public class BmiCalculatorActivity extends AppCompatActivity {
         }
     }
 
-    public void countBmi() {
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("bmi_unit", countBmiUnit.toString());
+        outState.putString("bmi_mass", editMass.getText().toString());
+        outState.putString("bmi_height", editHeight.getText().toString());
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        savedInstanceState.getString("bmi_unit", countBmiUnit.toString());
+        savedInstanceState.getString("bmi_mass", "");
+        savedInstanceState.getString("bmi_height", "");
+    }
+
+    private void countBmi(boolean init) {
         float mass = parseFloatDefault(editMass.getText().toString(), 0);
         float height = parseFloatDefault(editHeight.getText().toString(), 0);
 
         changeEditTextStyle(editMass, countBmi.isValidMass(mass));
         changeEditTextStyle(editHeight, countBmi.isValidHeight(height));
 
-        if (countBmi.isValidMass(mass) && countBmi.isValidHeight(height)) {
+        boolean pass = countBmi.isValidMass(mass) && countBmi.isValidHeight(height);
+        if (pass) {
             float bmi = countBmi.countBMI(mass, height);
             textBMI.setText(String.format(Locale.getDefault(), "%.3f", bmi));
             updateBmiColor(bmi);
         }
+        if (menuSave != null) menuSave.setVisible(pass);
 
+    }
+
+    private void countBmi() {
+        countBmi(false);
+    }
+
+    public void share(View view) {
+        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+        sharingIntent.setType("text/plain");
+        String shareBody = "Here is the share content body";
+        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject Here");
+        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+        startActivity(Intent.createChooser(sharingIntent, "Share via"));
     }
 
     private void initUnit(CountBmiUnit unit) {
         countBmiUnit = unit;
         countBmi = CountBmiFactory.getInstance(unit);
         if (unit == CountBmiUnit.METRIC) {
-            if (menuUseMetric != null) menuUseMetric.setChecked(true);
             setLabelUnits(R.string.unit_kg, R.string.unit_cm);
         } else if (unit == CountBmiUnit.IMPERIAL) {
-            if (menuUseImperial != null) menuUseImperial.setChecked(true);
             setLabelUnits(R.string.unit_lb, R.string.unit_ft);
         }
+        setRadioButtonUnit();
         countBmi();
+    }
+
+    private void setRadioButtonUnit() {
+        if (countBmiUnit == CountBmiUnit.METRIC) {
+            if (menuUseMetric != null) menuUseMetric.setChecked(true);
+        } else if (countBmiUnit == CountBmiUnit.IMPERIAL) {
+            if (menuUseImperial != null) menuUseImperial.setChecked(true);
+        }
     }
 
     private void setLabelUnits(int massId, int heightId) {
@@ -139,6 +188,24 @@ public class BmiCalculatorActivity extends AppCompatActivity {
             color = ContextCompat.getColor(getApplicationContext(), R.color.bmiObesity);
         }
         textBMI.setTextColor(color);
+    }
+
+    private void load() {
+        String bmiUnit = sharedPref.getString("bmi_unit", CountBmiFactory.getUnit().toString());
+        String bmiMass = sharedPref.getString("bmi_mass", "");
+        String bmiHeight = sharedPref.getString("bmi_height", "");
+
+        initUnit(CountBmiUnit.valueOf(bmiUnit));
+        editMass.setText(bmiMass);
+        editHeight.setText(bmiHeight);
+    }
+
+    private void save() {
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("bmi_unit", countBmiUnit.toString());
+        editor.putString("bmi_mass", editMass.getText().toString());
+        editor.putString("bmi_height", editHeight.getText().toString());
+        editor.apply();
     }
 
     private TextWatcher textWatcher = new TextWatcher() {

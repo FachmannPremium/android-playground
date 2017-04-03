@@ -77,4 +77,11 @@
         android:gravity="center"
         android:textSize="@dimen/font_size_h1" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="share"
+        android:layout_below="@+id/text_yours_bmi"
+        android:onClick="share"/>
+
 </RelativeLayout>
