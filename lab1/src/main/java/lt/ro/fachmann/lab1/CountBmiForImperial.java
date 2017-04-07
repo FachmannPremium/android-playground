@@ -7,8 +7,8 @@ package lt.ro.fachmann.lab1;
 public class CountBmiForImperial implements CountBmi {
     public static final float MIN_MASS = 22.05f;
     public static final float MAX_MASS = 551.16f;
-    public static final float MIN_HEIGHT = 1.64f;
-    public static final float MAX_HEIGHT = 8.20f;
+    public static final float MIN_HEIGHT = 19.69f;
+    public static final float MAX_HEIGHT = 98.43f;
     private static final float FACTOR = 703.0f;
 
     @Override

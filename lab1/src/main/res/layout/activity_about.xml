@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    tools:context="lt.ro.fachmann.lab1.AboutActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/image_background"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/about_background_height"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/background" />
+
+        <ImageView
+            android:id="@+id/image_author_face"
+            android:layout_width="@dimen/about_author_face_size"
+            android:layout_height="@dimen/about_author_face_size"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="@dimen/standard_margin"
+            android:src="@drawable/img" />
+
+        <TextView
+            android:id="@+id/text_author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/image_author_face"
+            android:layout_centerHorizontal="true"
+            android:text="@string/about_autor"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/about_author_size" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/text_author"
+            android:layout_centerHorizontal="true"
+            android:text="@string/about_author_name"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/about_author_name_sie" />
+
+        <TextView
+            android:id="@+id/text_about_version"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/image_background"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/standard_margin"
+            android:layout_marginTop="@dimen/standard_margin"
+            android:text="@string/about_version" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@id/text_about_version"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/standard_margin"
+            android:text="@string/about_production_year" />
+    </RelativeLayout>
+</ScrollView>
