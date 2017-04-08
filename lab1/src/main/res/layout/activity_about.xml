@@ -24,6 +24,7 @@
             android:layout_height="@dimen/about_author_face_size"
             android:layout_centerHorizontal="true"
             android:layout_margin="@dimen/standard_margin"
+            android:onClick="openPersonalSite"
             android:src="@drawable/img" />
 
         <TextView
@@ -41,17 +42,44 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/text_author"
             android:layout_centerHorizontal="true"
+            android:onClick="openPersonalSite"
             android:text="@string/about_author_name"
             android:textColor="@android:color/white"
             android:textSize="@dimen/about_author_name_sie" />
+
+        <ImageView
+            android:id="@+id/image_about_app_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_below="@id/image_background"
+            android:layout_margin="@dimen/standard_margin"
+            android:src="@mipmap/ic_launcher" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_alignBottom="@id/image_about_app_icon"
+            android:layout_toEndOf="@id/image_about_app_icon"
+            android:gravity="center"
+            android:text="@string/app_name"
+            android:textSize="@dimen/intro_text_h1" />
+
+        <TextView
+            android:id="@+id/text_about_site"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/image_about_app_icon"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/standard_margin"
+            android:onClick="openPersonalSite"
+            android:text="@string/about_site" />
 
         <TextView
             android:id="@+id/text_about_version"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/image_background"
+            android:layout_below="@id/text_about_site"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="@dimen/standard_margin"
             android:layout_marginTop="@dimen/standard_margin"
             android:text="@string/about_version" />
 

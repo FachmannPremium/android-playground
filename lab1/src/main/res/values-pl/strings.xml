@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Kalkulator BMI</string>
+
+    <string name="intro_label_ask_mass"><![CDATA[Podaj swoją wagę <i>[%1$s]</i>:]]></string>
+    <string name="intro_label_ask_heigth"><![CDATA[Podaj swój wzrost <i>[%1$s]</i>:]]></string>
+
+    <string name="height">Wzrost</string>
+    <string name="mass">Waga</string>
+
+    <string name="unit_change">Zmień jednostki</string>
+    <string name="unit_metric">Metryczne</string>
+    <string name="unit_imperial">Imperialne</string>
+
+    <string name="intro_menu_save">Zapisz</string>
+    <string name="intro_menu_clear">Wyczyść</string>
+    <string name="intro_menu_share">Udostępnij</string>
+    <string name="intro_menu_about">O programie</string>
+
+    <string name="intro_yours_bmi">Twoje BMI:</string>
+    <string name="intro_wrong_value">Podaj prawidłową wartość</string>
+    <string name="intro_bmi_info">
+        <b>Wskaźnik masy ciała</b> (ang. Body Mass Index (BMI) – współczynnik powstały przez podzielenie masy ciała podanej w kilogramach przez kwadrat wysokości podanej w metrach.\n\n
+        Według podstawowej klasyfikacji dla osób dorosłych wartość BMI wskazuje na:
+    </string>
+
+
+    <string name="bmi_underweight_word">niedowaga</string>
+    <string name="bmi_norm_word">wartość prawidłowa</string>
+    <string name="bmi_overweight_word">nadwaga</string>
+    <string name="bmi_obesity_word">otyłość</string>
+
+    <string name="about_label">O programie</string>
+    <string name="about_author_name">Bartłomiej Wierciński</string>
+    <string name="about_autor">AUTOR</string>
+    <string name="about_site">http://fachmann.ro.lt/</string>
+    <string name="about_version">Wersja 1.1</string>
+    <string name="about_production_year">2017</string>
+
+    <string name="share_subject">Moje BMI</string>
+    <string name="share_content">Moje BMI wynosi %1$s. Jest to wartość %2$s</string>
+    <string name="share_error">Brak aplikacji umożliwiającej udostępnianie tekstu</string>
+</resources>

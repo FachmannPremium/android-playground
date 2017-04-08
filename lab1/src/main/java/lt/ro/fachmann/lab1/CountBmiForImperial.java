@@ -1,9 +1,5 @@
 package lt.ro.fachmann.lab1;
 
-/**
- * Created by bartl on 28.03.2017.
- */
-
 public class CountBmiForImperial implements CountBmi {
     public static final float MIN_MASS = 22.05f;
     public static final float MAX_MASS = 551.16f;

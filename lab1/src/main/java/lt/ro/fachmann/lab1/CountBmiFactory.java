@@ -4,20 +4,16 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-/**
- * Created by bartl on 02.04.2017.
- */
-
 public final class CountBmiFactory {
-    private CountBmiFactory() {
-    }
-
     private static Map<CountBmiUnit, CountBmi> bmiMap;
 
     static {
         bmiMap = new HashMap<>(2);
         bmiMap.put(CountBmiUnit.METRIC, new CountBmiForMetric());
         bmiMap.put(CountBmiUnit.IMPERIAL, new CountBmiForImperial());
+    }
+
+    private CountBmiFactory() {
     }
 
     public static CountBmi getInstance() {

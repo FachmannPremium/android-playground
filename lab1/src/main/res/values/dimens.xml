@@ -1,18 +1,19 @@
 <resources>
     <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="intro_horizontal_padding">16dp</dimen>
-    <dimen name="intro_vertical_padding">16dp</dimen>
-    <dimen name="intro_edit_text_margin">15dp</dimen>
+    <dimen name="intro_horizontal_spacing">16dp</dimen>
+    <dimen name="intro_vertical_spacing">16dp</dimen>
     <dimen name="intro_spacing">15dp</dimen>
     <dimen name="intro_text_h1">30sp</dimen>
     <dimen name="form_height">40dp</dimen>
     <dimen name="info_height">36dp</dimen>
-    <dimen name="ask_label_width">165dp</dimen>
-    <dimen name="about_table_text_padding">5dp</dimen>
-    <dimen name="about_author_size">10sp</dimen>
-    <dimen name="about_author_name_sie">25sp</dimen>
-    <dimen name="standard_margin">10dp</dimen>
-    <dimen name="intro_result_margin">30dp</dimen>
+    <dimen name="intro_ask_label_width">165dp</dimen>
+    <dimen name="intro_result_margin">50dp</dimen>
+
     <dimen name="about_author_face_size">200dp</dimen>
     <dimen name="about_background_height">280dp</dimen>
+    <dimen name="about_author_size">10sp</dimen>
+    <dimen name="about_author_name_sie">25sp</dimen>
+    <dimen name="about_table_text_padding">5dp</dimen>
+
+    <dimen name="standard_margin">10dp</dimen>
 </resources>

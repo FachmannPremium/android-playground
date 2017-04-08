@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.TextViewCompat;
@@ -57,6 +58,9 @@ public class BmiCalculatorActivity extends AppCompatActivity {
 
     @BindView(R.id.text_bmi)
     TextView textBMI;
+
+    @BindView(R.id.button_clear)
+    FloatingActionButton buttonClear;
 
     Menu menuUnit;
     MenuItem menuUseMetric;
@@ -129,9 +133,8 @@ public class BmiCalculatorActivity extends AppCompatActivity {
         menuSave = menuUnit.findItem(R.id.menu_save);
 
         shareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(menuShare);
-        // Initialize the share intent
-        intent = new Intent(Intent.ACTION_SEND);
 
+        intent = new Intent(Intent.ACTION_SEND);
         intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_subject));
         intent.putExtra(Intent.EXTRA_TEXT, "");
         intent.setType("text/plain");
@@ -167,6 +170,11 @@ public class BmiCalculatorActivity extends AppCompatActivity {
         }
     }
 
+    public void clear(View view) {
+        editHeight.setText("");
+        editMass.setText("");
+    }
+
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -199,7 +207,7 @@ public class BmiCalculatorActivity extends AppCompatActivity {
         float bmi;
         if (inputGood) {
             bmi = bmiEvaluator.countBMI(mass, height);
-            textBMI.setText(String.format(Locale.getDefault(), "%.3f", bmi));
+            textBMI.setText(String.format(Locale.getDefault(), "%.2f", bmi));
             String content = getString(R.string.share_content, textBMI.getText().toString(), getBmiName(bmi));
             intent.putExtra(Intent.EXTRA_TEXT, content);
             menuShare.setVisible(true);
@@ -208,6 +216,7 @@ public class BmiCalculatorActivity extends AppCompatActivity {
         }
         updateBmiColor(bmi);
         menuSave.setVisible(inputGood);
+        buttonClear.setVisibility(inputGood ? View.VISIBLE : View.INVISIBLE);
         if (previousInputGood != inputGood) {
             animate(textBMI, inputGood, 400);
             animate(menuShare.getActionView(), inputGood, 400);
@@ -217,10 +226,13 @@ public class BmiCalculatorActivity extends AppCompatActivity {
     private void animate(final View view, final boolean visible, int duration) {
         view.setVisibility(View.VISIBLE);
         view.setAlpha(!visible ? 1.0f : 0.0f);
+
+        view.setTranslationX(visible ? 30.0f : 0.0f);
+
         view.animate()
                 .alpha(visible ? 1.0f : 0.0f)
                 .setInterpolator(new AccelerateInterpolator())
-                .translationX(visible ? 0.0f : -view.getHeight() / 8.0f)
+                .translationX(visible ? 0.0f : -30.0f)
                 .setDuration(duration)
                 .setListener(new AnimatorListenerAdapter() {
                     @Override

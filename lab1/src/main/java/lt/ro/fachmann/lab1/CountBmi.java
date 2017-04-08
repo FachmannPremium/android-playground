@@ -1,9 +1,5 @@
 package lt.ro.fachmann.lab1;
 
-/**
- * Created by stud on 20.03.2017.
- */
-
 public interface CountBmi {
     boolean isValidMass(float mass);
 

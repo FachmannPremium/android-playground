@@ -1,9 +1,5 @@
 package lt.ro.fachmann.lab1;
 
-/**
- * Created by stud on 20.03.2017.
- */
-
 public class CountBmiForMetric implements CountBmi {
     public static final float MIN_MASS = 10f;
     public static final float MAX_MASS = 250f;
