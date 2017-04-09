@@ -17,6 +17,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.ShareActionProvider;
 import android.text.Editable;
 import android.text.Html;
+import android.text.Selection;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -39,6 +40,7 @@ public class BmiCalculatorActivity extends AppCompatActivity {
     private static final String BMI_UNIT = "bmi_unit";
     private static final String BMI_MASS = "bmi_mass";
     private static final String BMI_HEIGHT = "bmi_height";
+    private static final String CURSOR_POSITION = "cursor_pos";
 
     private static final float UNDERWEIGHT_PEAK = 18.5f;
     private static final float NORM_PEAK = 25.0f;
@@ -181,6 +183,11 @@ public class BmiCalculatorActivity extends AppCompatActivity {
         outState.putString(BMI_UNIT, bmiUnit.toString());
         outState.putString(BMI_MASS, editMass.getText().toString());
         outState.putString(BMI_HEIGHT, editHeight.getText().toString());
+        if (editHeight.hasFocus()) {
+            outState.putInt(CURSOR_POSITION, editHeight.getSelectionEnd());
+        } else if (editMass.hasFocus()) {
+            outState.putInt(CURSOR_POSITION, editMass.getSelectionEnd());
+        }
     }
 
     @Override
@@ -194,6 +201,14 @@ public class BmiCalculatorActivity extends AppCompatActivity {
         bmiUnit = CountBmiUnit.valueOf(bmiUnitString);
         editMass.setText(bmiMass);
         editHeight.setText(bmiHeight);
+
+        if (editHeight.hasFocus()) {
+            int position = savedInstanceState.getInt(CURSOR_POSITION, editHeight.getText().toString().length() - 1);
+            Selection.setSelection(editHeight.getText(), position);
+        } else if (editMass.hasFocus()) {
+            int position = savedInstanceState.getInt(CURSOR_POSITION, editMass.getText().toString().length() - 1);
+            Selection.setSelection(editMass.getText(), position);
+        }
     }
 
     private void countBmi() {
@@ -323,6 +338,9 @@ public class BmiCalculatorActivity extends AppCompatActivity {
         bmiUnit = CountBmiUnit.valueOf(bmiUnitString);
         editMass.setText(bmiMass);
         editHeight.setText(bmiHeight);
+        if (bmiMass.length() > 0) {
+            Selection.setSelection(editMass.getText(), editHeight.getText().toString().length() - 1);
+        }
     }
 
     private void save() {

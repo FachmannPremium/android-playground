@@ -50,9 +50,9 @@ public class CountBmiTest {
     @Test
     public void height_isValid() {
         // GIVEN
-        float under = 0.1f;
-        float inRange = 1.7f;
-        float over = 5f;
+        float under = 10.0f;
+        float inRange = 170.0f;
+        float over = 500.0f;
         // WHEN
         CountBmi countBmi = new CountBmiForMetric();
         // THEN
@@ -62,16 +62,52 @@ public class CountBmiTest {
     }
 
     @Test
-    public void bmiCount_isValid() {
+    public void bmiCountMetric_isValid() {
         // GIVEN
         float mass = 78.0f;
-        float height = 1.78f;
+        float height = 178.0f;
         // WHEN
         CountBmi countBmi = new CountBmiForMetric();
         // THEN
         float bmi = countBmi.countBMI(mass, height);
-        float actual = 78.0f/1.78f/1.78f;
+        float actual = 78.0f / 1.78f / 1.78f;
         assertEquals(bmi, actual, 0.001f);
+    }
+
+    @Test
+    public void bmiCountImperial_isValid() {
+        // GIVEN
+        float mass = 170.0f;
+        float height = 70.0f;
+        // WHEN
+        CountBmi countBmi = new CountBmiForImperial();
+        // THEN
+        float bmi = countBmi.countBMI(mass, height);
+        float actual = 703.0f * 170.0f / 70.0f / 70.0f;
+        assertEquals(bmi, actual, 0.00001f);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void bmiCountMetric_testException() {
+        // GIVEN
+        float mass = 0.0f;
+        float height = 0.0f;
+        // WHEN
+        CountBmi countBmi = new CountBmiForMetric();
+        // THEN
+        float bmi = countBmi.countBMI(mass, height);
+    }
+
+
+    @Test(expected = IllegalArgumentException.class)
+    public void bmiCountImperial_testException() {
+        // GIVEN
+        float mass = 0.0f;
+        float height = 0.0f;
+        // WHEN
+        CountBmi countBmi = new CountBmiForImperial();
+        // THEN
+        float bmi = countBmi.countBMI(mass, height);
     }
 
 }

@@ -12,16 +12,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clickable="true"
-        android:onClick="hideKeyboard"
-        android:paddingBottom="@dimen/intro_vertical_spacing"
-        android:paddingLeft="@dimen/intro_horizontal_spacing"
-        android:paddingRight="@dimen/intro_horizontal_spacing"
-        android:paddingTop="@dimen/intro_vertical_spacing">
+        android:onClick="hideKeyboard">
+
+        <ImageView
+            android:id="@+id/gradient_background"
+            android:layout_width="wrap_content"
+            android:layout_height="165dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:alpha="0.2"
+            android:background="@drawable/form_background"
+            android:scaleType="centerCrop" />
 
         <TextView
             android:id="@+id/text_ask_mass"
             android:layout_width="@dimen/intro_ask_label_width"
             android:layout_height="@dimen/form_height"
+            android:layout_marginStart="@dimen/intro_horizontal_spacing"
+            android:layout_marginTop="@dimen/intro_vertical_spacing"
+            android:alpha="1.0"
             android:gravity="center|start"
             android:text="@string/intro_label_ask_mass" />
 
@@ -30,7 +40,9 @@
             android:layout_width="wrap_content"
             android:layout_height="@dimen/form_height"
             android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/intro_horizontal_spacing"
             android:layout_marginStart="@dimen/intro_horizontal_spacing"
+            android:layout_marginTop="@dimen/intro_vertical_spacing"
             android:layout_toEndOf="@+id/text_ask_mass"
             android:hint="@string/mass"
             android:inputType="numberDecimal"
@@ -41,6 +53,7 @@
             android:layout_width="@dimen/intro_ask_label_width"
             android:layout_height="@dimen/form_height"
             android:layout_below="@id/edit_mass"
+            android:layout_marginStart="@dimen/intro_horizontal_spacing"
             android:gravity="center|start"
             android:text="@string/intro_label_ask_heigth" />
 
@@ -48,30 +61,22 @@
             android:id="@+id/edit_height"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/form_height"
-            android:layout_alignParentEnd="true"
+            android:layout_alignEnd="@+id/edit_mass"
             android:layout_alignStart="@+id/edit_mass"
             android:layout_below="@+id/edit_mass"
             android:hint="@string/height"
             android:inputType="numberDecimal"
             android:maxLength="8" />
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/button_clear"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@id/edit_height"
-            android:layout_margin="@dimen/standard_margin"
-            android:onClick="clear"
-            android:src="@drawable/ic_delete_sweep"
-            android:visibility="invisible" />
 
         <TextView
             android:id="@+id/text_yours_bmi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/button_clear"
             android:layout_alignParentStart="true"
+            android:layout_below="@id/text_ask_height"
+            android:layout_marginStart="@dimen/intro_horizontal_spacing"
+            android:layout_marginTop="@dimen/form_height"
             android:text="@string/intro_yours_bmi" />
 
         <TextView
@@ -84,75 +89,106 @@
             android:layout_toEndOf="@+id/text_yours_bmi"
             android:textSize="@dimen/intro_text_h1" />
 
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/button_clear"
+            android:layout_width="@dimen/intro_clear_button_size"
+            android:layout_height="@dimen/intro_clear_button_size"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@id/edit_height"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/intro_vertical_spacing"
+            android:layout_marginTop="@dimen/intro_clear_button_center"
+            android:onClick="clear"
+            android:src="@drawable/ic_delete_sweep"
+            android:visibility="invisible" />
+
 
         <TextView
             android:id="@+id/text_about_bmi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/text_yours_bmi"
+            android:layout_below="@id/button_clear"
             android:layout_marginBottom="@dimen/standard_margin"
+            android:layout_marginEnd="@dimen/intro_horizontal_spacing"
+            android:layout_marginStart="@dimen/intro_horizontal_spacing"
             android:layout_marginTop="@dimen/standard_margin"
             android:text="@string/intro_bmi_info" />
 
-        <TableLayout
+        <TextView
+            android:id="@+id/bmi_table_underweight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/text_about_bmi"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/standard_margin">
+            android:layout_below="@id/text_about_bmi"
+            android:layout_marginStart="@dimen/intro_table_margin"
+            android:gravity="end"
+            android:padding="@dimen/about_table_text_padding"
+            android:text="@string/bmi_underweight_value"
+            android:textColor="@color/bmiUnderweight" />
 
-            <TableRow>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/bmi_table_underweight"
+            android:layout_toEndOf="@id/bmi_table_underweight"
+            android:padding="@dimen/about_table_text_padding"
+            android:text="@string/bmi_underweight_word" />
 
-                <TextView
-                    android:gravity="end"
-                    android:padding="@dimen/about_table_text_padding"
-                    android:text="@string/bmi_underweight_value"
-                    android:textColor="@color/bmiUnderweight" />
+        <TextView
+            android:id="@+id/bmi_table_norm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@id/bmi_table_underweight"
+            android:layout_below="@id/bmi_table_underweight"
+            android:gravity="end"
+            android:padding="@dimen/about_table_text_padding"
+            android:text="@string/bmi_norm_value"
+            android:textColor="@color/bmiNorm" />
 
-                <TextView
-                    android:padding="@dimen/about_table_text_padding"
-                    android:text="@string/bmi_underweight_word" />
-            </TableRow>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/bmi_table_norm"
+            android:layout_toEndOf="@id/bmi_table_norm"
+            android:padding="@dimen/about_table_text_padding"
+            android:text="@string/bmi_norm_word" />
 
-            <TableRow>
+        <TextView
+            android:id="@+id/bmi_table_overweight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@id/bmi_table_norm"
+            android:layout_below="@id/bmi_table_norm"
+            android:gravity="end"
+            android:padding="@dimen/about_table_text_padding"
+            android:text="@string/bmi_overweight_value"
+            android:textColor="@color/bmiOverweight" />
 
-                <TextView
-                    android:gravity="end"
-                    android:padding="@dimen/about_table_text_padding"
-                    android:text="@string/bmi_norm_value"
-                    android:textColor="@color/bmiNorm" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/bmi_table_overweight"
+            android:layout_toEndOf="@id/bmi_table_overweight"
+            android:padding="@dimen/about_table_text_padding"
+            android:text="@string/bmi_overweight_word" />
 
-                <TextView
-                    android:padding="@dimen/about_table_text_padding"
-                    android:text="@string/bmi_norm_word" />
-            </TableRow>
+        <TextView
+            android:id="@+id/bmi_table_obesity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@id/bmi_table_overweight"
+            android:layout_below="@id/bmi_table_overweight"
+            android:gravity="end"
+            android:padding="@dimen/about_table_text_padding"
+            android:text="@string/bmi_obesity_value"
+            android:textColor="@color/bmiObesity" />
 
-            <TableRow>
-
-                <TextView
-                    android:gravity="end"
-                    android:padding="@dimen/about_table_text_padding"
-                    android:text="@string/bmi_overweight_value"
-                    android:textColor="@color/bmiOverweight" />
-
-                <TextView
-                    android:padding="@dimen/about_table_text_padding"
-                    android:text="@string/bmi_overweight_word" />
-            </TableRow>
-
-            <TableRow>
-
-                <TextView
-                    android:gravity="end"
-                    android:padding="@dimen/about_table_text_padding"
-                    android:text="@string/bmi_obesity_value"
-                    android:textColor="@color/bmiObesity" />
-
-                <TextView
-                    android:padding="@dimen/about_table_text_padding"
-                    android:text="@string/bmi_obesity_word" />
-            </TableRow>
-        </TableLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/bmi_table_obesity"
+            android:layout_toEndOf="@id/bmi_table_obesity"
+            android:padding="@dimen/about_table_text_padding"
+            android:text="@string/bmi_obesity_word" />
 
     </RelativeLayout>
 

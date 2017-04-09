@@ -13,7 +13,11 @@
     <dimen name="about_background_height">280dp</dimen>
     <dimen name="about_author_size">10sp</dimen>
     <dimen name="about_author_name_sie">25sp</dimen>
-    <dimen name="about_table_text_padding">5dp</dimen>
+    <dimen name="about_table_text_padding">7dp</dimen>
 
     <dimen name="standard_margin">10dp</dimen>
+    <dimen name="intro_table_margin">90dp</dimen>
+    <dimen name="intro_info_bmi_spacing">50dp</dimen>
+    <dimen name="intro_clear_button_size">60dp</dimen>
+    <dimen name="intro_clear_button_center">38dp</dimen>
 </resources>

@@ -16,7 +16,6 @@
     <string name="intro_menu_clear">Wyczyść</string>
     <string name="intro_menu_share">Udostępnij</string>
     <string name="intro_menu_about">O programie</string>
-
     <string name="intro_yours_bmi">Twoje BMI:</string>
     <string name="intro_wrong_value">Podaj prawidłową wartość</string>
     <string name="intro_bmi_info">
