@@ -17,7 +17,7 @@
         <ImageView
             android:id="@+id/gradient_background"
             android:layout_width="wrap_content"
-            android:layout_height="165dp"
+            android:layout_height="@dimen/intro_form_background_height"
             android:layout_alignParentEnd="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
@@ -99,8 +99,7 @@
             android:layout_marginEnd="@dimen/intro_vertical_spacing"
             android:layout_marginTop="@dimen/intro_clear_button_center"
             android:onClick="clear"
-            android:src="@drawable/ic_delete_sweep"
-            android:visibility="invisible" />
+            android:src="@drawable/ic_delete_sweep" />
 
 
         <TextView

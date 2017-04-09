@@ -37,6 +37,6 @@
     <string name="about_production_year">2017</string>
 
     <string name="share_subject">Moje BMI</string>
-    <string name="share_content">Moje BMI wynosi %1$s. Jest to wartość %2$s</string>
+    <string name="share_content">Moje BMI wynosi %1$s. To jest %2$s!</string>
     <string name="share_error">Brak aplikacji umożliwiającej udostępnianie tekstu</string>
 </resources>

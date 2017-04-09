@@ -20,4 +20,5 @@
     <dimen name="intro_info_bmi_spacing">50dp</dimen>
     <dimen name="intro_clear_button_size">60dp</dimen>
     <dimen name="intro_clear_button_center">38dp</dimen>
+    <dimen name="intro_form_background_height">165dp</dimen>
 </resources>
