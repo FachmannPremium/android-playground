@@ -83,9 +83,15 @@ public class BmiCalculatorActivityTest {
 
     @Test
     public void properCountingForMetric() {
+        UiDevice device = UiDevice.getInstance(getInstrumentation());
+        try {
+            device.setOrientationNatural();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
         openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
-        onView(withText("Change units")).perform(click());
-        onView(withText("Metric")).perform(click());
+        onView(withText(mActivityRule.getActivity().getString(R.string.unit_change))).perform(click());
+        onView(withText(mActivityRule.getActivity().getString(R.string.unit_metric))).perform(click());
 
         onView(withId(R.id.edit_mass)).perform(click(), clearText(), typeText("70"), closeSoftKeyboard());
         onView(withId(R.id.edit_height)).perform(click(), clearText(), typeText("170"), closeSoftKeyboard());
@@ -93,33 +99,17 @@ public class BmiCalculatorActivityTest {
     }
 
     @Test
-    public void properResultColors() {
-        openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
-        onView(withText("Change units")).perform(click());
-        onView(withText("Metric")).perform(click());
-
-        onView(withId(R.id.edit_height)).perform(click(), clearText(), typeText("170"), closeSoftKeyboard());
-
-        onView(withId(R.id.edit_mass)).perform(click(), clearText(), typeText("50"), closeSoftKeyboard());
-        onView(withId(R.id.text_bmi)).check(matches(withTextColor(0xff26a69a)));
-
-        onView(withId(R.id.edit_mass)).perform(click(), clearText(), typeText("70"), closeSoftKeyboard());
-        onView(withId(R.id.text_bmi)).check(matches(withTextColor(0xff1b5e20)));
-
-        onView(withId(R.id.edit_mass)).perform(click(), clearText(), typeText("80"), closeSoftKeyboard());
-        onView(withId(R.id.text_bmi)).check(matches(withTextColor(0xffe16c18)));
-
-        onView(withId(R.id.edit_mass)).perform(click(), clearText(), typeText("110"), closeSoftKeyboard());
-        onView(withId(R.id.text_bmi)).check(matches(withTextColor(0xffb71c1c)));
-    }
-
-    @Test
     public void properCountingForImperial() {
+        UiDevice device = UiDevice.getInstance(getInstrumentation());
+        try {
+            device.setOrientationNatural();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
         openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
-        onView(withText("Change units")).perform(click());
-        onView(isRoot()).perform(waitFor(200));
-
-        onView(withText(containsString("I"))).perform(click());
+        onView(withText(mActivityRule.getActivity().getString(R.string.unit_change))).perform(click());
+        onView(isRoot()).perform(waitFor(1000));
+        onView(withText(mActivityRule.getActivity().getString(R.string.unit_imperial))).perform(click());
 
 
         onView(withId(R.id.edit_mass)).perform(click(), clearText(), typeText("170"), closeSoftKeyboard());
@@ -128,10 +118,51 @@ public class BmiCalculatorActivityTest {
     }
 
     @Test
-    public void forWrongInputResultInvisible() {
+    public void properResultColors() {
+        UiDevice device = UiDevice.getInstance(getInstrumentation());
+        try {
+            device.setOrientationNatural();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
         openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
-        onView(withText("Change units")).perform(click());
-        onView(withText("Metric")).perform(click());
+        onView(withText(mActivityRule.getActivity().getString(R.string.unit_change))).perform(click());
+        onView(withText(mActivityRule.getActivity().getString(R.string.unit_metric))).perform(click());
+
+        onView(withId(R.id.edit_height)).perform(click(), clearText(), typeText("170"), closeSoftKeyboard());
+
+        onView(withId(R.id.edit_mass)).perform(click(), clearText(), typeText("50"), closeSoftKeyboard());
+        onView(withId(R.id.text_bmi)).check(matches(withTextColor(
+                mActivityRule.getActivity().getResources().getColor(R.color.bmiUnderweight))
+        ));
+
+        onView(withId(R.id.edit_mass)).perform(click(), clearText(), typeText("70"), closeSoftKeyboard());
+        onView(withId(R.id.text_bmi)).check(matches(withTextColor(
+                mActivityRule.getActivity().getResources().getColor(R.color.bmiNorm))
+        ));
+
+        onView(withId(R.id.edit_mass)).perform(click(), clearText(), typeText("80"), closeSoftKeyboard());
+        onView(withId(R.id.text_bmi)).check(matches(withTextColor(
+                mActivityRule.getActivity().getResources().getColor(R.color.bmiOverweight))
+        ));
+
+        onView(withId(R.id.edit_mass)).perform(click(), clearText(), typeText("110"), closeSoftKeyboard());
+        onView(withId(R.id.text_bmi)).check(matches(withTextColor(
+                mActivityRule.getActivity().getResources().getColor(R.color.bmiObesity))
+        ));
+    }
+
+    @Test
+    public void forWrongInputResultInvisible() {
+        UiDevice device = UiDevice.getInstance(getInstrumentation());
+        try {
+            device.setOrientationNatural();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
+        onView(withText(mActivityRule.getActivity().getString(R.string.unit_change))).perform(click());
+        onView(withText(mActivityRule.getActivity().getString(R.string.unit_metric))).perform(click());
 
         onView(withId(R.id.edit_mass)).perform(click()).perform(clearText(), replaceText("170"), closeSoftKeyboard());
         onView(withId(R.id.edit_height)).perform(click()).perform(clearText(), replaceText("70"), closeSoftKeyboard());
@@ -161,8 +192,14 @@ public class BmiCalculatorActivityTest {
 
     @Test
     public void aboutActivityIsOpeningProperly() {
+        UiDevice device = UiDevice.getInstance(getInstrumentation());
+        try {
+            device.setOrientationNatural();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
         openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
-        onView(withText("About")).perform(click());
+        onView(withText(mActivityRule.getActivity().getString(R.string.intro_menu_about))).perform(click());
     }
 
     @Test
@@ -174,8 +211,8 @@ public class BmiCalculatorActivityTest {
             e.printStackTrace();
         }
         openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
-        onView(withText("Change units")).perform(click());
-        onView(withText("Metric")).perform(click());
+        onView(withText(mActivityRule.getActivity().getString(R.string.unit_change))).perform(click());
+        onView(withText(mActivityRule.getActivity().getString(R.string.unit_metric))).perform(click());
 
 
         onView(withId(R.id.edit_mass)).perform(click(), clearText(), typeText("70"), closeSoftKeyboard());

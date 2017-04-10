@@ -25,6 +25,7 @@
             android:layout_centerHorizontal="true"
             android:layout_margin="@dimen/standard_margin"
             android:onClick="openPersonalSite"
+            android:rotation="180"
             android:src="@drawable/img" />
 
         <TextView

@@ -14,7 +14,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class AboutActivity extends AppCompatActivity {
-    public static final int IMAGE_ANIMATION_DURATION = 800;
+    public static final int IMAGE_ANIMATION_DURATION = 1000;
     public static final int IMAGE_ANIMATION_DELAY = 500;
 
     @BindView(R.id.image_author_face)
@@ -27,7 +27,7 @@ public class AboutActivity extends AppCompatActivity {
         setContentView(R.layout.activity_about);
         ButterKnife.bind(this);
         imageCircle.animate()
-                .rotation(180)
+                .rotation(-180)
                 .setInterpolator(new AccelerateInterpolator())
                 .setDuration(IMAGE_ANIMATION_DURATION)
                 .setStartDelay(IMAGE_ANIMATION_DELAY);

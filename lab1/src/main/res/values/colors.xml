@@ -15,4 +15,9 @@
     <color name="bmiNorm">#1b5e20</color>
     <color name="bmiOverweight">#e16c18</color>
     <color name="bmiObesity">#b71c1c</color>
+
+    <color name="bmiUnderweightLight">#37b7ab</color>
+    <color name="bmiNormLight">#2c6f31</color>
+    <color name="bmiOverweightLight">#f27d29</color>
+    <color name="bmiObesityLight">#c82d2d</color>
 </resources>

@@ -180,13 +180,15 @@ public class BmiCalculatorActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString(BMI_UNIT, bmiUnit.toString());
-        outState.putString(BMI_MASS, editMass.getText().toString());
-        outState.putString(BMI_HEIGHT, editHeight.getText().toString());
-        if (editHeight.hasFocus()) {
-            outState.putInt(CURSOR_POSITION, editHeight.getSelectionEnd());
-        } else if (editMass.hasFocus()) {
-            outState.putInt(CURSOR_POSITION, editMass.getSelectionEnd());
+        if (bmiUnit != null && editMass != null && editHeight != null) {
+            outState.putString(BMI_UNIT, bmiUnit.toString());
+            outState.putString(BMI_MASS, editMass.getText().toString());
+            outState.putString(BMI_HEIGHT, editHeight.getText().toString());
+            if (editHeight.hasFocus()) {
+                outState.putInt(CURSOR_POSITION, editHeight.getSelectionEnd());
+            } else if (editMass.hasFocus()) {
+                outState.putInt(CURSOR_POSITION, editMass.getSelectionEnd());
+            }
         }
     }
 
@@ -295,26 +297,34 @@ public class BmiCalculatorActivity extends AppCompatActivity {
     }
 
     private void updateBmiColor(float bmi) {
-        int colorResource;
+        int colorResourceLight, colorResourceDark;
         if (bmi == BMI_INCORRECT) {
-            colorResource = R.color.colorPrimaryDark;
+            colorResourceDark = R.color.colorPrimaryDark;
+            colorResourceLight = R.color.colorPrimary;
         } else if (bmi < UNDERWEIGHT_PEAK) {
-            colorResource = R.color.bmiUnderweight;
+            colorResourceDark = R.color.bmiUnderweight;
+            colorResourceLight = R.color.bmiUnderweightLight;
         } else if (bmi < NORM_PEAK) {
-            colorResource = R.color.bmiNorm;
+            colorResourceDark = R.color.bmiNorm;
+            colorResourceLight = R.color.bmiNormLight;
         } else if (bmi < OVERWEIGHT_PEAK) {
-            colorResource = R.color.bmiOverweight;
+            colorResourceDark = R.color.bmiOverweight;
+            colorResourceLight = R.color.bmiOverweightLight;
         } else {
-            colorResource = R.color.bmiObesity;
+            colorResourceDark = R.color.bmiObesity;
+            colorResourceLight = R.color.bmiObesityLight;
         }
 
-        final int color = ContextCompat.getColor(getApplicationContext(), colorResource);
-        textBMI.setTextColor(color);
-        final ColorDrawable d = new ColorDrawable(color + 0x00111111);
+        final int colorLight = ContextCompat.getColor(getApplicationContext(), colorResourceLight);
+        final int colorDark = ContextCompat.getColor(getApplicationContext(), colorResourceDark);
+
+        textBMI.setTextColor(colorDark);
+
+        final ColorDrawable d = new ColorDrawable(colorLight);
         actionBar.setBackgroundDrawable(d);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            getWindow().setStatusBarColor(color);
+            getWindow().setStatusBarColor(colorDark);
         }
     }
 
