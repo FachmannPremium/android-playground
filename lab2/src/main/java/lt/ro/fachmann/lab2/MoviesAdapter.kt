@@ -14,9 +14,9 @@ class MoviesAdapter(private val moviesList: List<Movie>) : RecyclerView.Adapter<
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bindMovie(movie: Movie) {
-            itemView.title.text = movie.title
-            itemView.genre.text = movie.genre
-            itemView.year.text = movie.year
+            itemView.title?.text = movie.title
+            itemView.genre?.text = movie.genre
+            itemView.year?.text = movie.year
         }
     }
 
