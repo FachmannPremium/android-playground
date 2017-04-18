@@ -4,28 +4,59 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import kotlinx.android.synthetic.main.movie_list_row.view.*
+import android.widget.Toast
+import kotlinx.android.synthetic.main.movie_list_row_even.view.*
+import kotlinx.android.synthetic.main.movie_list_row_odd.view.*
+import org.jetbrains.anko.onClick
 
+class MoviesAdapter(private val moviesList: List<Movie>) : RecyclerView.Adapter<MoviesAdapter.MovieViewHolder>() {
 
-/**
- * Created by bartl on 12.04.2017.
- */
-class MoviesAdapter(private val moviesList: List<Movie>) : RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
+    abstract class MovieViewHolder(itemView: View, var movie: Movie? = null) : RecyclerView.ViewHolder(itemView) {
+        init {
+            itemView.onClick { Toast.makeText(it?.context, movie?.toString(), Toast.LENGTH_SHORT).show() }
+        }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bindMovie(movie: Movie) {
-            itemView.title?.text = movie.title
-            itemView.genre?.text = movie.genre
-            itemView.year?.text = movie.year
+        open fun bindMovie(movie: Movie) {
+            this.movie = movie
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.movie_list_row, parent, false)
-        return ViewHolder(itemView)
+    class MovieViewHolderEven(itemView: View) : MovieViewHolder(itemView) {
+        override fun bindMovie(movie: Movie) {
+            super.bindMovie(movie)
+            itemView.title_even?.text = movie.title
+            itemView.genre_even?.text = movie.genre
+            itemView.year_even?.text = movie.year
+        }
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    class MovieViewHolderOdd(itemView: View) : MovieViewHolder(itemView) {
+        override fun bindMovie(movie: Movie) {
+            super.bindMovie(movie)
+            itemView.title_odd?.text = movie.title
+            itemView.genre_odd?.text = movie.genre
+            itemView.year_odd?.text = movie.year
+        }
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return position % 2
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
+        when (viewType) {
+            0 -> {
+                val itemView = LayoutInflater.from(parent.context).inflate(R.layout.movie_list_row_even, parent, false)
+                return MovieViewHolderEven(itemView)
+            }
+            else -> {
+                val itemView = LayoutInflater.from(parent.context).inflate(R.layout.movie_list_row_odd, parent, false)
+                return MovieViewHolderOdd(itemView)
+            }
+        }
+    }
+
+    override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         holder.bindMovie(moviesList[position])
     }
 
