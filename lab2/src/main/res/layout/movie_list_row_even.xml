@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/parent_even"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/parentEven"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?android:attr/selectableItemBackground"
@@ -12,16 +13,24 @@
     android:paddingRight="16dp"
     android:paddingTop="10dp">
 
-    <ImageView
-        android:id="@+id/image_even"
+
+    <ru.egslava.blurredview.BlurredImageView
+        android:id="@+id/imageBackgroundEven"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginEnd="10dp"
-        android:background="@color/title"
-        android:src="@drawable/poster" />
+        android:scaleType="centerCrop"
+        app:downSampling="2"
+        app:keepOriginal="true"
+        app:radius="0.7" />
+
+    <ImageView
+        android:id="@+id/imageEven"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="10dp" />
 
     <TextView
-        android:id="@+id/year_even"
+        android:id="@+id/yearEven"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -31,21 +40,21 @@
         android:textColor="@color/year" />
 
     <TextView
-        android:id="@+id/title_even"
+        android:id="@+id/titleEven"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@id/year_even"
-        android:layout_toEndOf="@id/image_even"
-        android:layout_toStartOf="@id/year_even"
+        android:layout_alignTop="@id/yearEven"
+        android:layout_toEndOf="@id/imageEven"
+        android:layout_toStartOf="@id/yearEven"
         android:textColor="@color/title"
         android:textSize="16sp"
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/genre_even"
+        android:id="@+id/genreEven"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/title_even"
-        android:layout_toEndOf="@id/image_even" />
+        android:layout_below="@id/titleEven"
+        android:layout_toEndOf="@id/imageEven" />
 
 </RelativeLayout>

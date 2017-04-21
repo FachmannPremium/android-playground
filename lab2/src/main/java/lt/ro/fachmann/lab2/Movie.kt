@@ -1,10 +1,15 @@
 package lt.ro.fachmann.lab2
 
+import android.support.annotation.DrawableRes
+import java.io.Serializable
+
 /**
  * Created by bartl on 12.04.2017.
  */
-class Movie(var title: String = "", var genre: String = "", var year: String = "") {
-    override fun toString(): String {
-        return "Movie(title='$title', genre='$genre', year='$year')"
-    }
+class Movie(val title: String = "",
+            val genre: String = "",
+            val year: String = "",
+            val description: String = "",
+            @DrawableRes val posterId: Int = -1) : Serializable {
+    override fun toString() = "Movie(title=$title, genre='$genre', year='$year')"
 }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/parent_odd"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/parentOdd"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?android:attr/selectableItemBackground"
@@ -12,39 +13,49 @@
     android:paddingRight="16dp"
     android:paddingTop="10dp">
 
-    <ImageView
-        android:id="@+id/image_odd"
+
+    <ru.egslava.blurredview.BlurredImageView
+        android:id="@+id/imageBackgroundOdd"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="10dp"
-        android:background="@color/title"
-        android:src="@drawable/poster" />
+        android:scaleType="centerCrop"
+        app:downSampling="2"
+        app:keepOriginal="true"
+        app:radius="0.7" />
+
+    <ImageView
+        android:id="@+id/imageOdd"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignStart="@id/imageBackgroundOdd" />
+
 
     <TextView
-        android:id="@+id/year_odd"
+        android:id="@+id/yearOdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
-        android:layout_toStartOf="@id/image_odd"
+        android:layout_toStartOf="@id/imageBackgroundOdd"
         android:textColor="@color/year" />
 
     <TextView
-        android:id="@+id/title_odd"
+        android:id="@+id/titleOdd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@id/year_odd"
-        android:layout_toStartOf="@id/year_odd"
+        android:layout_alignTop="@id/yearOdd"
+        android:layout_toStartOf="@id/yearOdd"
         android:textColor="@color/title"
         android:textSize="16sp"
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/genre_odd"
+        android:id="@+id/genreOdd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/title_odd"
-        android:layout_toStartOf="@id/image_odd" />
+        android:layout_below="@id/titleOdd"
+        android:layout_toStartOf="@id/imageOdd" />
 
 </RelativeLayout>
