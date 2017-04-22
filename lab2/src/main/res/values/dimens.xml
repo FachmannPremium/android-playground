@@ -1,3 +1,24 @@
 <resources>
-    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="about_author_name_size">22sp</dimen>
+    <dimen name="about_author_title_size">12sp</dimen>
+    <dimen name="about_author_year_size">12sp</dimen>
+    <dimen name="about_background_height">180dp</dimen>
+
+    <dimen name="details_poster_height">300dp</dimen>
+    <dimen name="details_rate_size">20sp</dimen>
+    <dimen name="details_standard_spacing">10dp</dimen>
+    <dimen name="details_year_margin">15dp</dimen>
+    <dimen name="details_year_size">15sp</dimen>
+
+    <dimen name="list_floating_button_margin">16dp</dimen>
+    <dimen name="list_poster_size">60dp</dimen>
+    <dimen name="list_row_horizontal_padding">16dp</dimen>
+    <dimen name="list_row_vertical_padding_bottom">5dp</dimen>
+    <dimen name="list_row_vertical_padding_top">10dp</dimen>
+    <dimen name="list_seen_background_padding">20dp</dimen>
+    <dimen name="list_seen_background_radius">10dp</dimen>
+    <dimen name="list_seen_margin_top">40dp</dimen>
+    <dimen name="list_seen_size">30dp</dimen>
+    <dimen name="list_standard_spacing">10dp</dimen>
+    <dimen name="list_title_size">16sp</dimen>
 </resources>

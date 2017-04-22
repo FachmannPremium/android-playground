@@ -8,37 +8,40 @@
     android:clickable="true"
     android:focusable="true"
     android:orientation="vertical"
-    android:paddingBottom="10dp"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:paddingTop="10dp">
+    android:paddingBottom="@dimen/list_row_vertical_padding_bottom"
+    android:paddingLeft="@dimen/list_row_horizontal_padding"
+    android:paddingRight="@dimen/list_row_horizontal_padding"
+    android:paddingTop="@dimen/list_row_vertical_padding_top">
 
 
     <ru.egslava.blurredview.BlurredImageView
-        android:id="@+id/imageBackgroundOdd"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:id="@+id/posterBackgroundOdd"
+        android:layout_width="@dimen/list_poster_size"
+        android:layout_height="@dimen/list_poster_size"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="10dp"
+        android:layout_marginEnd="@dimen/list_standard_spacing"
+        android:layout_marginStart="@dimen/list_standard_spacing"
         android:scaleType="centerCrop"
         app:downSampling="2"
-        app:keepOriginal="true"
+        app:keepOriginal="false"
+
         app:radius="0.7" />
 
     <ImageView
-        android:id="@+id/imageOdd"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_alignStart="@id/imageBackgroundOdd" />
+        android:id="@+id/posterOdd"
+        android:layout_width="@dimen/list_poster_size"
+        android:layout_height="@dimen/list_poster_size"
+        android:layout_alignStart="@id/posterBackgroundOdd"
+        android:layout_alignTop="@id/posterBackgroundOdd" />
 
 
     <TextView
         android:id="@+id/yearOdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_toStartOf="@id/imageBackgroundOdd"
+        android:layout_marginStart="@dimen/list_standard_spacing"
+        android:layout_marginTop="@dimen/list_standard_spacing"
+        android:layout_toStartOf="@id/posterBackgroundOdd"
         android:textColor="@color/year" />
 
     <TextView
@@ -48,7 +51,7 @@
         android:layout_alignTop="@id/yearOdd"
         android:layout_toStartOf="@id/yearOdd"
         android:textColor="@color/title"
-        android:textSize="16sp"
+        android:textSize="@dimen/list_title_size"
         android:textStyle="bold" />
 
     <TextView
@@ -56,6 +59,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/titleOdd"
-        android:layout_toStartOf="@id/imageOdd" />
+        android:layout_toStartOf="@id/posterBackgroundOdd" />
 
+
+    <ImageView
+        android:id="@+id/seenIconOdd"
+        android:layout_width="@dimen/list_seen_size"
+        android:layout_height="@dimen/list_seen_size"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/posterBackgroundOdd"
+        android:layout_marginTop="@dimen/list_seen_margin_top"
+        android:src="@drawable/ic_movie_seen_layer" />
 </RelativeLayout>

@@ -9,7 +9,7 @@
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBarDetails"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="@dimen/details_poster_height"
         android:fitsSystemWindows="true"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
@@ -19,7 +19,6 @@
             android:layout_height="match_parent"
             android:fitsSystemWindows="false"
             app:contentScrim="@android:color/transparent"
-            app:expandedTitleMarginStart="20dp"
             app:expandedTitleTextAppearance="@android:color/transparent"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
@@ -47,9 +46,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|end"
-                android:layout_marginBottom="15dp"
-                android:layout_marginEnd="15dp"
-                android:textSize="15sp" />
+                android:layout_marginBottom="@dimen/details_year_margin"
+                android:layout_marginEnd="@dimen/details_year_margin"
+                android:textSize="@dimen/details_year_size" />
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbarDetails"
@@ -76,16 +75,17 @@
                 android:id="@+id/ratingBarDetails"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintRight_toRightOf="parent" />
+                android:layout_margin="@dimen/details_standard_spacing"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:text="Ocena:"
-                android:textSize="20sp"
+                android:layout_marginBottom="@dimen/details_standard_spacing"
+                android:layout_marginEnd="@dimen/details_standard_spacing"
+                android:text="@string/details_rate"
+                android:textSize="@dimen/details_rate_size"
                 app:layout_constraintBottom_toBottomOf="@+id/ratingBarDetails"
                 app:layout_constraintRight_toLeftOf="@+id/ratingBarDetails" />
 
@@ -93,14 +93,10 @@
                 android:id="@+id/descriptionDetails"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_margin="@dimen/details_standard_spacing"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ratingBarDetails" />
         </android.support.constraint.ConstraintLayout>
-
     </android.support.v4.widget.NestedScrollView>
 </android.support.design.widget.CoordinatorLayout>

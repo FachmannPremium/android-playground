@@ -13,6 +13,7 @@ import lt.ro.fachmann.lab2.Movie
 import lt.ro.fachmann.lab2.R
 import lt.ro.fachmann.lab2.adapters.MoviesAdapter
 import org.jetbrains.anko.startActivity
+import org.jetbrains.anko.toast
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -26,9 +27,14 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(toolbar)
 
-        adapter = MoviesAdapter(movieList) {
-            startActivity<MovieDetailsActivity>(MovieDetailsActivity.MOVIE to it)
-        }
+        adapter = MoviesAdapter(movieList,
+                {
+                    startActivity<MovieDetailsActivity>(MovieDetailsActivity.MOVIE to it)
+                },
+                {
+                    toast("blabl")
+                    it.seen = !it.seen
+                })
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
 
@@ -36,9 +42,6 @@ class MainActivity : AppCompatActivity() {
             override fun onMove(recyclerView: RecyclerView?, viewHolder: RecyclerView.ViewHolder?, target: RecyclerView.ViewHolder?) = false
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-//                movieList.removeAt(position)
-//                recyclerView.adapter.notifyItemRemoved(position)
-//                recyclerView.adapter.notifyDataSetChanged()
                 adapter.remove(viewHolder, recyclerView)
             }
         }

@@ -4,6 +4,8 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import kotlinx.android.synthetic.main.movie_list_row_even.view.*
 import kotlinx.android.synthetic.main.movie_list_row_odd.view.*
 import lt.ro.fachmann.lab2.Movie
@@ -12,7 +14,8 @@ import lt.ro.fachmann.lab2.snack
 import org.jetbrains.anko.imageResource
 
 class MoviesAdapter(private val moviesList: MutableList<Movie>,
-                    private val itemClick: (Movie) -> Unit) :
+                    private val itemClick: (Movie) -> Unit,
+                    val itemLongClick: (Movie) -> Unit) :
         RecyclerView.Adapter<MoviesAdapter.MovieViewHolder>() {
 
     override fun getItemCount() = moviesList.size
@@ -25,38 +28,64 @@ class MoviesAdapter(private val moviesList: MutableList<Movie>,
         when (viewType) {
             0 -> {
                 val itemView = LayoutInflater.from(parent.context).inflate(R.layout.movie_list_row_even, parent, false)
-                return MovieViewHolderEven(itemView, itemClick)
+                return MovieViewHolderEven(itemView, itemClick, itemLongClick)
             }
             else -> {
                 val itemView = LayoutInflater.from(parent.context).inflate(R.layout.movie_list_row_odd, parent, false)
-                return MovieViewHolderOdd(itemView, itemClick)
+                return MovieViewHolderOdd(itemView, itemClick, itemLongClick)
             }
         }
     }
 
-    abstract class MovieViewHolder(itemView: View, val itemClick: (Movie) -> Unit) : RecyclerView.ViewHolder(itemView) {
-        open fun bindMovie(movie: Movie) = itemView.setOnClickListener { itemClick(movie) }
+    abstract class MovieViewHolder(itemView: View, val itemClick: (Movie) -> Unit, val itemLongClick: (Movie) -> Unit) : RecyclerView.ViewHolder(itemView) {
+
+        open fun bindMovie(movie: Movie) {
+            seenIconUpdate(movie.seen)
+            itemView.setOnClickListener { itemClick(movie) }
+            itemView.setOnLongClickListener {
+                flipMovie(movie)
+                true
+            }
+        }
+
+        fun flipMovie(movie: Movie) {
+            movie.seen = !movie.seen
+            seenIconUpdate(movie.seen)
+        }
+
+        fun bindViews(movie: Movie, posterBackground: ImageView, poster: ImageView, title: TextView, genre: TextView, year: TextView, seenIcon: ImageView) = with(movie) {
+            posterBackground.imageResource = posterId
+            poster.imageResource = posterId
+            title.text = this.title
+            genre.text = this.genre
+            year.text = this.year
+            seenIcon.setOnClickListener {
+                flipMovie(this)
+            }
+        }
+
+        abstract fun seenIconUpdate(seen: Boolean)
     }
 
-    class MovieViewHolderEven(itemView: View, itemClick: (Movie) -> Unit) : MovieViewHolder(itemView, itemClick) {
-        override fun bindMovie(movie: Movie) = with(movie) {
-            super.bindMovie(this)
-            itemView.imageBackgroundEven.imageResource = posterId
-            itemView.imageEven.imageResource = posterId
-            itemView.titleEven?.text = title
-            itemView.genreEven?.text = genre
-            itemView.yearEven?.text = year
+    class MovieViewHolderEven(itemView: View, itemClick: (Movie) -> Unit, itemLongClick: (Movie) -> Unit) : MovieViewHolder(itemView, itemClick, itemLongClick) {
+        override fun bindMovie(movie: Movie) = with(itemView) {
+            super.bindMovie(movie)
+            bindViews(movie, posterBackgroundEven, posterEven, titleEven, genreEven, yearEven, seenIconEven)
+        }
+
+        override fun seenIconUpdate(seen: Boolean) {
+            itemView.seenIconEven.imageResource = if (seen) R.drawable.ic_movie_seen_layer else R.drawable.ic_movie_unseen_layer
         }
     }
 
-    class MovieViewHolderOdd(itemView: View, itemClick: (Movie) -> Unit) : MovieViewHolder(itemView, itemClick) {
-        override fun bindMovie(movie: Movie) = with(movie) {
-            super.bindMovie(this)
-            itemView.imageBackgroundOdd.imageResource = posterId
-            itemView.imageOdd.imageResource = posterId
-            itemView.titleOdd.text = title
-            itemView.genreOdd.text = genre
-            itemView.yearOdd.text = year
+    class MovieViewHolderOdd(itemView: View, itemClick: (Movie) -> Unit, itemLongClick: (Movie) -> Unit) : MovieViewHolder(itemView, itemClick, itemLongClick) {
+        override fun bindMovie(movie: Movie) = with(itemView) {
+            super.bindMovie(movie)
+            bindViews(movie, posterBackgroundOdd, posterOdd, titleOdd, genreOdd, yearOdd, seenIconOdd)
+        }
+
+        override fun seenIconUpdate(seen: Boolean) {
+            itemView.seenIconOdd.imageResource = if (seen) R.drawable.ic_movie_seen_layer else R.drawable.ic_movie_unseen_layer
         }
     }
 
