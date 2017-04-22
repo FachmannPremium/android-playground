@@ -36,10 +36,10 @@ class MainActivity : AppCompatActivity() {
             override fun onMove(recyclerView: RecyclerView?, viewHolder: RecyclerView.ViewHolder?, target: RecyclerView.ViewHolder?) = false
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val position: Int = viewHolder.adapterPosition
-                movieList.removeAt(position)
-                recyclerView.adapter.notifyItemRemoved(position)
-                recyclerView.adapter.notifyDataSetChanged()
+//                movieList.removeAt(position)
+//                recyclerView.adapter.notifyItemRemoved(position)
+//                recyclerView.adapter.notifyDataSetChanged()
+                adapter.remove(viewHolder, recyclerView)
             }
         }
 

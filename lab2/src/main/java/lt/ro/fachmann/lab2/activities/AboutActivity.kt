@@ -18,7 +18,10 @@ class AboutActivity : AppCompatActivity() {
         aboutBackgroundVideo.setOnPreparedListener { mp -> mp.isLooping = true }
         aboutBackgroundVideo.start()
         aboutBackgroundVideo.requestFocus()
-        aboutBackgroundVideo
+    }
 
+    override fun onResume() {
+        super.onResume()
+        aboutBackgroundVideo.start()
     }
 }

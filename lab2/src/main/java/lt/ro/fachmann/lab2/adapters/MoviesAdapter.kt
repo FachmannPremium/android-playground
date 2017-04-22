@@ -8,9 +8,10 @@ import kotlinx.android.synthetic.main.movie_list_row_even.view.*
 import kotlinx.android.synthetic.main.movie_list_row_odd.view.*
 import lt.ro.fachmann.lab2.Movie
 import lt.ro.fachmann.lab2.R
+import lt.ro.fachmann.lab2.snack
 import org.jetbrains.anko.imageResource
 
-class MoviesAdapter(private val moviesList: List<Movie>,
+class MoviesAdapter(private val moviesList: MutableList<Movie>,
                     private val itemClick: (Movie) -> Unit) :
         RecyclerView.Adapter<MoviesAdapter.MovieViewHolder>() {
 
@@ -57,5 +58,20 @@ class MoviesAdapter(private val moviesList: List<Movie>,
             itemView.genreOdd.text = genre
             itemView.yearOdd.text = year
         }
+    }
+
+    fun remove(viewHolder: RecyclerView.ViewHolder, recyclerView: RecyclerView) {
+        val position = viewHolder.adapterPosition
+        val movie = moviesList[position]
+        recyclerView.snack(recyclerView.context.getString(R.string.list_removed_movie, movie.title)) {
+            setAction(recyclerView.context.getString(R.string.list_removed_undo), {
+                moviesList.add(position, movie)
+                notifyItemInserted(position)
+                notifyDataSetChanged()
+            })
+        }
+        moviesList.removeAt(position)
+        notifyItemRemoved(position)
+        notifyDataSetChanged()
     }
 }
