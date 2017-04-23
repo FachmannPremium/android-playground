@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import com.squareup.picasso.Picasso
+import jp.wasabeef.picasso.transformations.BlurTransformation
 import kotlinx.android.synthetic.main.movie_list_row_even.view.*
 import kotlinx.android.synthetic.main.movie_list_row_odd.view.*
 import lt.ro.fachmann.lab2.Movie
@@ -14,8 +16,7 @@ import lt.ro.fachmann.lab2.snack
 import org.jetbrains.anko.imageResource
 
 class MoviesAdapter(private val moviesList: MutableList<Movie>,
-                    private val itemClick: (Movie) -> Unit,
-                    val itemLongClick: (Movie) -> Unit) :
+                    private val itemClick: (Movie) -> Unit) :
         RecyclerView.Adapter<MoviesAdapter.MovieViewHolder>() {
 
     override fun getItemCount() = moviesList.size
@@ -28,16 +29,16 @@ class MoviesAdapter(private val moviesList: MutableList<Movie>,
         when (viewType) {
             0 -> {
                 val itemView = LayoutInflater.from(parent.context).inflate(R.layout.movie_list_row_even, parent, false)
-                return MovieViewHolderEven(itemView, itemClick, itemLongClick)
+                return MovieViewHolderEven(itemView, itemClick)
             }
             else -> {
                 val itemView = LayoutInflater.from(parent.context).inflate(R.layout.movie_list_row_odd, parent, false)
-                return MovieViewHolderOdd(itemView, itemClick, itemLongClick)
+                return MovieViewHolderOdd(itemView, itemClick)
             }
         }
     }
 
-    abstract class MovieViewHolder(itemView: View, val itemClick: (Movie) -> Unit, val itemLongClick: (Movie) -> Unit) : RecyclerView.ViewHolder(itemView) {
+    abstract class MovieViewHolder(itemView: View, val itemClick: (Movie) -> Unit) : RecyclerView.ViewHolder(itemView) {
 
         open fun bindMovie(movie: Movie) {
             seenIconUpdate(movie.seen)
@@ -55,6 +56,9 @@ class MoviesAdapter(private val moviesList: MutableList<Movie>,
 
         fun bindViews(movie: Movie, posterBackground: ImageView, poster: ImageView, title: TextView, genre: TextView, year: TextView, seenIcon: ImageView) = with(movie) {
             posterBackground.imageResource = posterId
+            //posterBackground.setRadius(0.5f)
+            Picasso.with(posterBackground.context).load(posterId).fit().centerCrop()
+                    .transform(BlurTransformation(posterBackground.context, 8)).into(posterBackground)
             poster.imageResource = posterId
             title.text = this.title
             genre.text = this.genre
@@ -67,7 +71,7 @@ class MoviesAdapter(private val moviesList: MutableList<Movie>,
         abstract fun seenIconUpdate(seen: Boolean)
     }
 
-    class MovieViewHolderEven(itemView: View, itemClick: (Movie) -> Unit, itemLongClick: (Movie) -> Unit) : MovieViewHolder(itemView, itemClick, itemLongClick) {
+    class MovieViewHolderEven(itemView: View, itemClick: (Movie) -> Unit) : MovieViewHolder(itemView, itemClick) {
         override fun bindMovie(movie: Movie) = with(itemView) {
             super.bindMovie(movie)
             bindViews(movie, posterBackgroundEven, posterEven, titleEven, genreEven, yearEven, seenIconEven)
@@ -78,7 +82,7 @@ class MoviesAdapter(private val moviesList: MutableList<Movie>,
         }
     }
 
-    class MovieViewHolderOdd(itemView: View, itemClick: (Movie) -> Unit, itemLongClick: (Movie) -> Unit) : MovieViewHolder(itemView, itemClick, itemLongClick) {
+    class MovieViewHolderOdd(itemView: View, itemClick: (Movie) -> Unit) : MovieViewHolder(itemView, itemClick) {
         override fun bindMovie(movie: Movie) = with(itemView) {
             super.bindMovie(movie)
             bindViews(movie, posterBackgroundOdd, posterOdd, titleOdd, genreOdd, yearOdd, seenIconOdd)

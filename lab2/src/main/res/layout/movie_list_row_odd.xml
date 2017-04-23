@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/parentOdd"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -14,18 +13,13 @@
     android:paddingTop="@dimen/list_row_vertical_padding_top">
 
 
-    <ru.egslava.blurredview.BlurredImageView
+    <ImageView
         android:id="@+id/posterBackgroundOdd"
         android:layout_width="@dimen/list_poster_size"
         android:layout_height="@dimen/list_poster_size"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="@dimen/list_standard_spacing"
-        android:layout_marginStart="@dimen/list_standard_spacing"
-        android:scaleType="centerCrop"
-        app:downSampling="2"
-        app:keepOriginal="false"
-
-        app:radius="0.7" />
+        android:layout_marginStart="@dimen/list_standard_spacing" />
 
     <ImageView
         android:id="@+id/posterOdd"
