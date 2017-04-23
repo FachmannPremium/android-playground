@@ -52,6 +52,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/titleEven"
+        android:layout_marginEnd="@dimen/list_standard_spacing"
         android:layout_toEndOf="@id/posterBackgroundEven" />
 
     <ImageView
@@ -61,6 +62,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignTop="@+id/posterBackgroundEven"
         android:layout_marginTop="@dimen/list_seen_margin_top"
+        android:padding="@dimen/list_seen_padding"
         android:src="@drawable/ic_movie_seen_layer" />
 
 </RelativeLayout>

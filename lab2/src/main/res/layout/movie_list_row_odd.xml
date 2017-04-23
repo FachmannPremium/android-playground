@@ -18,7 +18,7 @@
         android:layout_width="@dimen/list_poster_size"
         android:layout_height="@dimen/list_poster_size"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="@dimen/list_standard_spacing"
+        android:layout_marginEnd="@dimen/list_odd_poster_end"
         android:layout_marginStart="@dimen/list_standard_spacing" />
 
     <ImageView
@@ -63,5 +63,6 @@
         android:layout_alignParentEnd="true"
         android:layout_alignTop="@+id/posterBackgroundOdd"
         android:layout_marginTop="@dimen/list_seen_margin_top"
+        android:padding="@dimen/list_seen_padding"
         android:src="@drawable/ic_movie_seen_layer" />
 </RelativeLayout>
