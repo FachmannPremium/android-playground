@@ -1,4 +1,4 @@
-package lt.ro.fachmann.lab2
+package lt.ro.fachmann.lab2.utils
 
 import android.content.Context
 import android.util.AttributeSet

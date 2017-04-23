@@ -1,4 +1,4 @@
-package lt.ro.fachmann.lab2
+package lt.ro.fachmann.lab2.utils
 
 import android.support.design.widget.Snackbar
 import android.view.View

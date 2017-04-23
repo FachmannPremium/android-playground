@@ -8,11 +8,12 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingBottom="50dp">
 
-        <lt.ro.fachmann.lab2.CenterCropVideoView
+        <VideoView
             android:id="@+id/aboutBackgroundVideo"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="@dimen/about_background_height"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent" />
@@ -26,27 +27,41 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/aboutBackgroundVideo"
             app:layout_constraintHorizontal_bias="0.18"
-            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintLeft_toLeftOf="@+id/aboutBackgroundVideo"
             app:layout_constraintRight_toRightOf="@+id/aboutBackgroundVideo"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/aboutBackgroundVideo"
             app:layout_constraintVertical_bias="0.27" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
             android:text="@string/about_author_title"
             android:textSize="@dimen/about_author_title_size"
-            app:layout_constraintBottom_toTopOf="@+id/textView"
+            app:layout_constraintBottom_toBottomOf="@+id/textView"
             app:layout_constraintLeft_toLeftOf="@+id/textView" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:text="@string/about_author_year"
             android:textSize="@dimen/about_author_year_size"
             app:layout_constraintRight_toRightOf="@+id/textView"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            app:layout_constraintTop_toTopOf="@+id/textView" />
+
+        <ImageView
+            android:id="@+id/testImage1"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="0dp"
+            android:onClick="flipCard"
+            android:src="@drawable/ic_movie_seen_layer"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/aboutBackgroundVideo" />
 
     </android.support.constraint.ConstraintLayout>
+
 
 </ScrollView>

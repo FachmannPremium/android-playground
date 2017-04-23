@@ -1,5 +1,6 @@
 package lt.ro.fachmann.lab2.adapters
 
+import android.animation.Animator
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +13,8 @@ import kotlinx.android.synthetic.main.movie_list_row_even.view.*
 import kotlinx.android.synthetic.main.movie_list_row_odd.view.*
 import lt.ro.fachmann.lab2.Movie
 import lt.ro.fachmann.lab2.R
-import lt.ro.fachmann.lab2.snack
+import lt.ro.fachmann.lab2.utils.SimpleAnimatorListener
+import lt.ro.fachmann.lab2.utils.snack
 import org.jetbrains.anko.imageResource
 
 class MoviesAdapter(private val moviesList: MutableList<Movie>,
@@ -38,7 +40,7 @@ class MoviesAdapter(private val moviesList: MutableList<Movie>,
         }
     }
 
-    abstract class MovieViewHolder(itemView: View, val itemClick: (Movie) -> Unit) : RecyclerView.ViewHolder(itemView) {
+    abstract class MovieViewHolder(itemView: View, val seenIcon: ImageView, val itemClick: (Movie) -> Unit) : RecyclerView.ViewHolder(itemView) {
 
         open fun bindMovie(movie: Movie) {
             seenIconUpdate(movie.seen)
@@ -49,12 +51,7 @@ class MoviesAdapter(private val moviesList: MutableList<Movie>,
             }
         }
 
-        fun flipMovie(movie: Movie) {
-            movie.seen = !movie.seen
-            seenIconUpdate(movie.seen)
-        }
-
-        fun bindViews(movie: Movie, posterBackground: ImageView, poster: ImageView, title: TextView, genre: TextView, year: TextView, seenIcon: ImageView) = with(movie) {
+        protected fun bindViews(movie: Movie, posterBackground: ImageView, poster: ImageView, title: TextView, genre: TextView, year: TextView, seenIcon: ImageView) = with(movie) {
             posterBackground.imageResource = posterId
             //posterBackground.setRadius(0.5f)
             Picasso.with(posterBackground.context).load(posterId).fit().centerCrop()
@@ -68,29 +65,36 @@ class MoviesAdapter(private val moviesList: MutableList<Movie>,
             }
         }
 
-        abstract fun seenIconUpdate(seen: Boolean)
+        protected fun seenIconUpdate(seen: Boolean) {
+            seenIcon.imageResource = if (seen) R.drawable.ic_movie_seen_layer else R.drawable.ic_movie_unseen_layer
+        }
+
+        protected fun flipMovie(movie: Movie) {
+            movie.seen = !movie.seen
+            seenIcon.rotationY = 0f
+            seenIcon.animate().rotationY(90f).setListener(object : SimpleAnimatorListener() {
+                override fun onAnimationEnd(p0: Animator?) {
+                    seenIconUpdate(movie.seen)
+                    seenIcon.rotationY = 270f
+                    seenIcon.animate().rotationY(360f).setListener(null)
+                }
+            })
+        }
     }
 
-    class MovieViewHolderEven(itemView: View, itemClick: (Movie) -> Unit) : MovieViewHolder(itemView, itemClick) {
+    class MovieViewHolderEven(itemView: View, itemClick: (Movie) -> Unit) : MovieViewHolder(itemView, itemView.seenIconEven, itemClick) {
         override fun bindMovie(movie: Movie) = with(itemView) {
             super.bindMovie(movie)
             bindViews(movie, posterBackgroundEven, posterEven, titleEven, genreEven, yearEven, seenIconEven)
         }
-
-        override fun seenIconUpdate(seen: Boolean) {
-            itemView.seenIconEven.imageResource = if (seen) R.drawable.ic_movie_seen_layer else R.drawable.ic_movie_unseen_layer
-        }
     }
 
-    class MovieViewHolderOdd(itemView: View, itemClick: (Movie) -> Unit) : MovieViewHolder(itemView, itemClick) {
+    class MovieViewHolderOdd(itemView: View, itemClick: (Movie) -> Unit) : MovieViewHolder(itemView, itemView.seenIconOdd, itemClick) {
         override fun bindMovie(movie: Movie) = with(itemView) {
             super.bindMovie(movie)
             bindViews(movie, posterBackgroundOdd, posterOdd, titleOdd, genreOdd, yearOdd, seenIconOdd)
         }
 
-        override fun seenIconUpdate(seen: Boolean) {
-            itemView.seenIconOdd.imageResource = if (seen) R.drawable.ic_movie_seen_layer else R.drawable.ic_movie_unseen_layer
-        }
     }
 
     fun remove(viewHolder: RecyclerView.ViewHolder, recyclerView: RecyclerView) {
