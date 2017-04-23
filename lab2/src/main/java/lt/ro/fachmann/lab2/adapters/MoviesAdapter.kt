@@ -72,11 +72,12 @@ class MoviesAdapter(private val moviesList: MutableList<Movie>,
         protected fun flipMovie(movie: Movie) {
             movie.seen = !movie.seen
             seenIcon.rotationY = 0f
-            seenIcon.animate().rotationY(90f).setListener(object : SimpleAnimatorListener() {
-                override fun onAnimationEnd(p0: Animator?) {
+            val duration: Long = 120
+            seenIcon.animate().rotationY(90f).setDuration(duration).setListener(object : SimpleAnimatorListener() {
+                override fun onAnimationEnd(animation: Animator) {
                     seenIconUpdate(movie.seen)
                     seenIcon.rotationY = 270f
-                    seenIcon.animate().rotationY(360f).setListener(null)
+                    seenIcon.animate().rotationY(360f).setDuration(duration).setListener(null)
                 }
             })
         }
