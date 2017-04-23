@@ -3,6 +3,7 @@
     <dimen name="about_author_title_size">12sp</dimen>
     <dimen name="about_author_year_size">12sp</dimen>
     <dimen name="about_background_height">180dp</dimen>
+    <dimen name="about_background_width">320dp</dimen>
 
     <dimen name="details_poster_height">300dp</dimen>
     <dimen name="details_rate_size">20sp</dimen>

@@ -1,6 +1,8 @@
 package lt.ro.fachmann.lab2.activities
 
 import android.animation.Animator
+
+
 import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Bundle
@@ -11,9 +13,10 @@ import lt.ro.fachmann.lab2.R
 import lt.ro.fachmann.lab2.utils.SimpleAnimatorListener
 import org.jetbrains.anko.imageResource
 
-
 class AboutActivity : AppCompatActivity() {
     var sound: MediaPlayer? = null
+    var seen: Boolean = true
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_about)
@@ -35,11 +38,11 @@ class AboutActivity : AppCompatActivity() {
         sound?.start()
     }
 
+
     override fun onPause() {
         super.onPause()
         sound?.pause()
     }
-
 
     override fun onDestroy() {
         super.onDestroy()
@@ -54,13 +57,18 @@ class AboutActivity : AppCompatActivity() {
         aboutBackgroundVideo.requestFocus()
     }
 
-    var b: Boolean = true
     fun flipCard(view: View) {
+        seen = !seen
+        if (seen)
+            sound?.start()
+        else {
+
+            sound?.pause()
+        }
         testImage1.rotationY = 0f
         testImage1.animate().rotationY(90f).setListener(object : SimpleAnimatorListener() {
             override fun onAnimationEnd(animation: Animator) {
-                b = !b
-                testImage1.imageResource = if (b) R.drawable.ic_movie_seen_layer else R.drawable.ic_movie_unseen_layer
+                testImage1.imageResource = if (seen) R.drawable.ic_movie_seen_layer else R.drawable.ic_movie_unseen_layer
                 testImage1.rotationY = 270f
                 testImage1.animate().rotationY(360f).setListener(null)
             }
