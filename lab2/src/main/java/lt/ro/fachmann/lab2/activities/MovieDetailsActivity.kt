@@ -1,49 +1,50 @@
 package lt.ro.fachmann.lab2.activities
 
 import android.os.Bundle
+import android.support.v4.app.FragmentManager
+import android.support.v4.app.FragmentStatePagerAdapter
 import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_movie_details.*
-import lt.ro.fachmann.lab2.Movie
 import lt.ro.fachmann.lab2.R
-import org.jetbrains.anko.imageResource
+import lt.ro.fachmann.lab2.activities.fragments.MovieImagesFragment
+import lt.ro.fachmann.lab2.activities.fragments.MovieMainFragment
+import lt.ro.fachmann.lab2.data.Movie
+import lt.ro.fachmann.lab2.data.MoviesDataBase
+import lt.ro.fachmann.lab2.utils.DepthPageTransformer
 
 
 class MovieDetailsActivity : AppCompatActivity() {
-
     companion object {
-        val MOVIE = "MovieDetailsActivity:movie"
+        val NUM_PAGES = 2
+        val MOVIE_INDEX = "MovieDetailsActivity:movieIndex"
     }
+
+    lateinit var movie: Movie
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movie_details)
 
+        val movieIndex = intent.getIntExtra(MOVIE_INDEX, -1)
+        movie = MoviesDataBase.movieList[movieIndex]
+
         setSupportActionBar(toolbarDetails)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
+        supportActionBar?.title = movie.title
 
-        /*appBarDetails.addOnOffsetChangedListener { appBarLayout, verticalOffset ->
-            run {
-                var maxOf = maxOf(map(verticalOffset, -appBarDetails.totalScrollRange, -appBarDetails.totalScrollRange + 130, 255, 0), 0)
-                var color = resources.getColor(R.color.colorPrimary)
-                supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.argb(maxOf, Color.red(color), Color.green(color), Color.blue(color))))
-            }
-
-        }*/
-
-        val movie = intent.getSerializableExtra(MOVIE) as Movie
-        bindMovie(movie)
+        val pagerAdapter = ScreenSlidePagerAdapter(supportFragmentManager)
+        viewPagerDetails.adapter = pagerAdapter
+        viewPagerDetails.setPageTransformer(true, DepthPageTransformer())
     }
 
-    fun bindMovie(movie: Movie) = with(movie) {
-        supportActionBar?.title = title
-        yearDetails.text = year
-        descriptionDetails.text = description
-        posterDetails.imageResource = posterId
-        posterBackgroundDetails.imageResource = posterId
+    private inner class ScreenSlidePagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
+        override fun getItem(position: Int) = when (position) {
+            0 -> MovieMainFragment()
+            else -> MovieImagesFragment()
+        }
+
+        override fun getCount() = NUM_PAGES
     }
 
-    fun map(x: Int, in_min: Int, in_max: Int, out_min: Int, out_max: Int): Int {
-        return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min
-    }
 }

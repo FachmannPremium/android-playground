@@ -32,6 +32,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.MovieDetailsActivity" />
         </activity>
+        <activity
+            android:name=".activities.MovieImageFullscreenActivity"
+            android:label="@string/title_activity_movie_image"
+            android:theme="@android:style/Theme.Black.NoTitleBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.MovieDetailsActivity" />
+        </activity>
     </application>
 
 </manifest>

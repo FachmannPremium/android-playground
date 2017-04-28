@@ -1,10 +1,13 @@
-## Kalkulator BMI
-
+#Systemy wbudowane i mobilne
 Bartłomiej Wierciński 2017
 
 227987
 
-## Instalacja
+##Moduł: Lab1 - Kalkulator BMI
+
+##Moduł: Lab2 - Filmy
+
+# Instalacja
 
 nic niż tylko
 

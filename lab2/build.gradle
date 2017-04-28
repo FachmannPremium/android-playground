@@ -32,14 +32,17 @@ dependencies {
     })
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:gridlayout-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:design:25.3.1'
     compile 'com.android.support:recyclerview-v7:25.3.1'
+    compile 'com.android.support:support-v4:25.3.1'
     compile 'org.jetbrains.anko:anko-sdk15:0.9.1'
     compile 'org.jetbrains.anko:anko-support-v4:0.9.1'
     compile 'org.jetbrains.anko:anko-appcompat-v7:0.9.1'
-    compile 'ru.egslava:blurredview:1.0'
     compile 'com.hudomju:swipe-to-dismiss-undo:1.0'
+    compile 'com.github.chrisbanes:PhotoView:2.0.0'
+    compile 'ru.egslava:blurredview:1.0'
     compile 'jp.wasabeef:picasso-transformations:2.1.2'
     testCompile 'junit:junit:4.12'
 }

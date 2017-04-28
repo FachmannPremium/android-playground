@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:grid="http://schemas.android.com/apk/res-auto"
+
+        android:id="@+id/imagesGrid"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        grid:alignmentMode="alignBounds"
+        grid:columnCount="3"
+        grid:layout_constraintLeft_toLeftOf="parent"
+        grid:layout_constraintRight_toRightOf="parent"
+        grid:rowCount="2"
+        grid:rowOrderPreserved="false">
+
+        <ImageView
+            android:id="@+id/movieImage0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            grid:layout_column="0"
+            grid:layout_columnWeight="1"
+            grid:layout_row="0"
+            grid:layout_rowWeight="1" />
+
+        <ImageView
+            android:id="@+id/movieImage1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            grid:layout_column="1"
+            grid:layout_columnWeight="1"
+            grid:layout_row="0"
+            grid:layout_rowWeight="1" />
+
+        <ImageView
+            android:id="@+id/movieImage2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            grid:layout_column="2"
+            grid:layout_columnWeight="1"
+            grid:layout_row="0"
+            grid:layout_rowWeight="1" />
+
+        <ImageView
+            android:id="@+id/movieImage3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            grid:layout_column="0"
+            grid:layout_columnWeight="1"
+            grid:layout_row="1"
+            grid:layout_rowWeight="1" />
+
+        <ImageView
+            android:id="@+id/movieImage4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            grid:layout_column="1"
+            grid:layout_columnWeight="1"
+            grid:layout_row="1"
+            grid:layout_rowWeight="1" />
+
+        <ImageView
+            android:id="@+id/movieImage5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            grid:layout_column="2"
+            grid:layout_columnWeight="1"
+            grid:layout_row="1"
+            grid:layout_rowWeight="1" />
+    </android.support.v7.widget.GridLayout>
+
+    <ImageView
+        android:id="@+id/movieDetailsActorImageView1"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="@dimen/details_standard_spacing"
+        android:layout_marginTop="@dimen/details_standard_spacing"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imagesGrid" />
+
+    <TextView
+        android:id="@+id/movieDetailsActor1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/details_standard_spacing"
+        app:layout_constraintBottom_toBottomOf="@+id/movieDetailsActorImageView1"
+        app:layout_constraintLeft_toRightOf="@+id/movieDetailsActorImageView1"
+        app:layout_constraintTop_toTopOf="@+id/movieDetailsActorImageView1" />
+
+    <ImageView
+        android:id="@+id/movieDetailsActorImageView2"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="@dimen/details_standard_spacing"
+        android:layout_marginTop="@dimen/details_standard_spacing"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/movieDetailsActorImageView1" />
+
+    <TextView
+        android:id="@+id/movieDetailsActor2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/details_standard_spacing"
+        app:layout_constraintBottom_toBottomOf="@+id/movieDetailsActorImageView2"
+        app:layout_constraintLeft_toRightOf="@+id/movieDetailsActorImageView2"
+        app:layout_constraintTop_toTopOf="@+id/movieDetailsActorImageView2" />
+
+    <ImageView
+        android:id="@+id/movieDetailsActorImageView3"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="@dimen/details_standard_spacing"
+        android:layout_marginTop="@dimen/details_standard_spacing"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/movieDetailsActorImageView2" />
+
+    <TextView
+        android:id="@+id/movieDetailsActor3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/details_standard_spacing"
+        app:layout_constraintBottom_toBottomOf="@+id/movieDetailsActorImageView3"
+        app:layout_constraintLeft_toRightOf="@+id/movieDetailsActorImageView3"
+        app:layout_constraintTop_toTopOf="@+id/movieDetailsActorImageView3" />
+
+</android.support.constraint.ConstraintLayout>

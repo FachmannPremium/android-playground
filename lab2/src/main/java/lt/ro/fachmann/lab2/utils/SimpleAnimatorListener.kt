@@ -4,8 +4,8 @@ import android.animation.Animator
 
 /**
  * Created by bartl on 23.04.2017.
+ * With this Listener its not necessary to override all methods
  */
-
 abstract class SimpleAnimatorListener : Animator.AnimatorListener {
 
     override fun onAnimationStart(animation: Animator) {

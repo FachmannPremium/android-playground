@@ -2,7 +2,6 @@ package lt.ro.fachmann.lab2.adapters
 
 import android.animation.Animator
 import android.support.v7.widget.RecyclerView
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -11,9 +10,10 @@ import com.squareup.picasso.Picasso
 import jp.wasabeef.picasso.transformations.BlurTransformation
 import kotlinx.android.synthetic.main.movie_list_row_even.view.*
 import kotlinx.android.synthetic.main.movie_list_row_odd.view.*
-import lt.ro.fachmann.lab2.Movie
 import lt.ro.fachmann.lab2.R
+import lt.ro.fachmann.lab2.data.Movie
 import lt.ro.fachmann.lab2.utils.SimpleAnimatorListener
+import lt.ro.fachmann.lab2.utils.inflate
 import lt.ro.fachmann.lab2.utils.snack
 import org.jetbrains.anko.imageResource
 
@@ -30,18 +30,17 @@ class MoviesAdapter(private val moviesList: MutableList<Movie>,
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         when (viewType) {
             0 -> {
-                val itemView = LayoutInflater.from(parent.context).inflate(R.layout.movie_list_row_even, parent, false)
+                val itemView = parent.inflate(R.layout.movie_list_row_even)
                 return MovieViewHolderEven(itemView, itemClick)
             }
             else -> {
-                val itemView = LayoutInflater.from(parent.context).inflate(R.layout.movie_list_row_odd, parent, false)
+                val itemView = parent.inflate(R.layout.movie_list_row_odd)
                 return MovieViewHolderOdd(itemView, itemClick)
             }
         }
     }
 
     abstract class MovieViewHolder(itemView: View, val seenIcon: ImageView, val itemClick: (Movie) -> Unit) : RecyclerView.ViewHolder(itemView) {
-
         open fun bindMovie(movie: Movie) {
             seenIconUpdate(movie.seen)
             itemView.setOnClickListener { itemClick(movie) }
@@ -53,7 +52,6 @@ class MoviesAdapter(private val moviesList: MutableList<Movie>,
 
         protected fun bindViews(movie: Movie, posterBackground: ImageView, poster: ImageView, title: TextView, genre: TextView, year: TextView, seenIcon: ImageView) = with(movie) {
             posterBackground.imageResource = posterId
-            //posterBackground.setRadius(0.5f)
             Picasso.with(posterBackground.context).load(posterId).fit().centerCrop()
                     .transform(BlurTransformation(posterBackground.context, 8)).into(posterBackground)
             poster.imageResource = posterId
@@ -105,11 +103,11 @@ class MoviesAdapter(private val moviesList: MutableList<Movie>,
             setAction(recyclerView.context.getString(R.string.list_removed_undo), {
                 moviesList.add(position, movie)
                 notifyItemInserted(position)
-                notifyDataSetChanged()
+                notifyItemRangeChanged(position, moviesList.size)
             })
         }
         moviesList.removeAt(position)
         notifyItemRemoved(position)
-        notifyDataSetChanged()
+        notifyItemRangeChanged(position, moviesList.size)
     }
 }
