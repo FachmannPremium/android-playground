@@ -29,3 +29,10 @@ fun map(x: Int, in_min: Int, in_max: Int, out_min: Int, out_max: Int): Int {
 
 inline fun <reified T : Any> Fragment.intentFor(vararg params: Pair<String, Any>): Intent =
         AnkoInternals.createIntent(activity, T::class.java, params)
+
+
+fun <T> MutableList<T>.swap(index1: Int, index2: Int) {
+    val tmp = this[index1] // 'this' corresponds to the list
+    this[index1] = this[index2]
+    this[index2] = tmp
+}

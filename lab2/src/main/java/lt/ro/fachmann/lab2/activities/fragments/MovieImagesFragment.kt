@@ -1,8 +1,8 @@
 package lt.ro.fachmann.lab2.activities.fragments
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,27 +34,37 @@ class MovieImagesFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         movie = (activity as MovieDetailsActivity).movie
-        (0..imagesGrid.childCount)
-                .filter { it < movie.imagesIds.size }
-                .forEach { setUpImage(imagesGrid.getChildAt(it), movie.imagesIds[it]) }
+        imagesGrid.post {
+            (0..imagesGrid.childCount)
+                    .filter { it < movie.imagesIds.size }
+                    .forEach { setUpImage(imagesGrid.getChildAt(it), movie.imagesIds[it]) }
+        }
+
         val nameViews = listOf(movieDetailsActor1, movieDetailsActor2, movieDetailsActor3)
         val photoViews = listOf(movieDetailsActorImageView1, movieDetailsActorImageView2, movieDetailsActorImageView3)
         (0..3)
                 .filter { it < movie.actors.size }
                 .forEach {
                     nameViews[it].text = "${movie.actors[it].firstName} ${movie.actors[it].name}"
-                    Picasso.with(context).load(movie.actors[it].photoId).centerCrop().resize(200, 200).transform(CropCircleTransformation()).into(photoViews[it])
+                    Picasso.with(context).load(movie.actors[it].photoId)
+                            .centerCrop().resize(200, 200)
+                            .transform(CropCircleTransformation())
+                            .into(photoViews[it])
                 }
 
     }
 
     fun setUpImage(view: View, resourceId: Int): Unit {
-        val width = context.resources.displayMetrics.widthPixels / 3
-        val height = 250 * (context.resources.displayMetrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT) / 2
-        val toInt = height.toInt()
+        val squareSize = (
+                if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT)
+                    imagesGrid.width.toFloat() / imagesGrid.columnCount
+                else
+                    imagesGrid.height.toFloat() / imagesGrid.rowCount
+                ).toInt()
+
         Picasso.with(context)
                 .load(resourceId)
-                .centerCrop().resize(width, toInt)
+                .centerCrop().resize(squareSize, squareSize)
                 .into(view as ImageView)
         view.onClick { _ -> startActivity(intentFor<MovieImageFullscreenActivity>(MovieImageFullscreenActivity.RESOURCE_ID to resourceId).singleTop()) }
     }
