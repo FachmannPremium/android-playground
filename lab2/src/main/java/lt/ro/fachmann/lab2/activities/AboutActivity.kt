@@ -1,21 +1,16 @@
 package lt.ro.fachmann.lab2.activities
 
-import android.animation.Animator
-
 
 import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.view.View
 import kotlinx.android.synthetic.main.activity_about.*
 import lt.ro.fachmann.lab2.R
-import lt.ro.fachmann.lab2.utils.SimpleAnimatorListener
-import org.jetbrains.anko.imageResource
 
 class AboutActivity : AppCompatActivity() {
     var sound: MediaPlayer? = null
-    var seen: Boolean = true
+//    var seen: Boolean = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +33,6 @@ class AboutActivity : AppCompatActivity() {
         sound?.start()
     }
 
-
     override fun onPause() {
         super.onPause()
         sound?.pause()
@@ -57,7 +51,7 @@ class AboutActivity : AppCompatActivity() {
         aboutBackgroundVideo.requestFocus()
     }
 
-    fun flipCard(view: View) {
+    /*fun flipCard(view: View) {
         seen = !seen
         if (seen)
             sound?.start()
@@ -73,5 +67,5 @@ class AboutActivity : AppCompatActivity() {
                 testImage1.animate().rotationY(360f).setListener(null)
             }
         })
-    }
+    }*/
 }

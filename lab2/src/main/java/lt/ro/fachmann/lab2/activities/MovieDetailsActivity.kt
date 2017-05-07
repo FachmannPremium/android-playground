@@ -46,5 +46,4 @@ class MovieDetailsActivity : AppCompatActivity() {
 
         override fun getCount() = NUM_PAGES
     }
-
 }

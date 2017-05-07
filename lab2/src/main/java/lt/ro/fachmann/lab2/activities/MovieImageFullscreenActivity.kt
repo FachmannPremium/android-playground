@@ -18,5 +18,4 @@ class MovieImageFullscreenActivity : Activity() {
         val resourceId = intent.getIntExtra(RESOURCE_ID, -1)
         if (resourceId != -1) movieImageFullscreen.imageResource = resourceId
     }
-
 }

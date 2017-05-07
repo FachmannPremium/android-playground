@@ -35,15 +35,13 @@ class MovieImagesFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         movie = (activity as MovieDetailsActivity).movie
         imagesGrid.post {
-            (0..imagesGrid.childCount)
-                    .filter { it < movie.imagesIds.size }
+            (0..imagesGrid.childCount).filter { it < movie.imagesIds.size }
                     .forEach { setUpImage(imagesGrid.getChildAt(it), movie.imagesIds[it]) }
         }
 
         val nameViews = listOf(movieDetailsActor1, movieDetailsActor2, movieDetailsActor3)
         val photoViews = listOf(movieDetailsActorImageView1, movieDetailsActorImageView2, movieDetailsActorImageView3)
-        (0..3)
-                .filter { it < movie.actors.size }
+        (0..3).filter { it < movie.actors.size }
                 .forEach {
                     nameViews[it].text = "${movie.actors[it].firstName} ${movie.actors[it].name}"
                     Picasso.with(context).load(movie.actors[it].photoId)
