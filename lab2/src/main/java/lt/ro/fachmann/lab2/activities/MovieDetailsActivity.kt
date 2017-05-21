@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
 import android.support.v7.app.AppCompatActivity
+import android.view.Menu
+import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_movie_details.*
 import lt.ro.fachmann.lab2.R
 import lt.ro.fachmann.lab2.activities.fragments.MovieImagesFragment
@@ -36,6 +38,20 @@ class MovieDetailsActivity : AppCompatActivity() {
         val pagerAdapter = ScreenSlidePagerAdapter(supportFragmentManager)
         viewPagerDetails.adapter = pagerAdapter
         viewPagerDetails.setPageTransformer(true, DepthPageTransformer())
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_movie_details, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+        R.id.menu_swap -> {
+            val newPage = (viewPagerDetails.currentItem + 1) % 2
+            viewPagerDetails.currentItem = newPage
+            true
+        }
+        else -> super.onOptionsItemSelected(item)
     }
 
     private inner class ScreenSlidePagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
