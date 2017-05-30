@@ -21,11 +21,13 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 //    private var last_z: Float = 0f
 //    private var SHAKE_THRESHOLD = 600
 
-    private val openGLRenderer = OpenGLRenderer()
+    private lateinit var openGLRenderer: OpenGLRenderer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        openGLRenderer = OpenGLRenderer(this)
+        glView.setEGLContextClientVersion(2)
         glView.setRenderer(openGLRenderer)
 
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
@@ -46,8 +48,6 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                 val y = event.values[1]
                 val z = event.values[2]
 
-                openGLRenderer.x = -x
-                openGLRenderer.y = -y
                 helloBox.text = String.format(Locale.getDefault(), "%.3f %.3f %.3f", x, y, z)
 //                val diffTime = curTime - lastUpdate
 //                lastUpdate = curTime
