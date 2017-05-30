@@ -7,14 +7,13 @@ android {
     buildToolsVersion "25.0.2"
 
     defaultConfig {
-        applicationId "lt.ro.fachmann.lab2"
-        minSdkVersion 21
+        applicationId "lt.ro.fachmann.wasserwaga"
+        minSdkVersion 19
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
+
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        renderscriptTargetApi 22
-        renderscriptSupportModeEnabled true
 
     }
     buildTypes {
@@ -26,25 +25,15 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support:gridlayout-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.android.support:design:25.3.1'
-    compile 'com.android.support:recyclerview-v7:25.3.1'
-    compile 'com.android.support:support-v4:25.3.1'
     compile 'org.jetbrains.anko:anko-sdk15:0.9.1'
     compile 'org.jetbrains.anko:anko-support-v4:0.9.1'
     compile 'org.jetbrains.anko:anko-appcompat-v7:0.9.1'
-    compile 'com.github.chrisbanes:PhotoView:2.0.0'
-    compile 'ru.egslava:blurredview:1.0'
-    compile 'jp.wasabeef:picasso-transformations:2.1.2'
     testCompile 'junit:junit:4.12'
-}
-repositories {
-    mavenCentral()
 }
