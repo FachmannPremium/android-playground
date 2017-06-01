@@ -21,14 +21,13 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 //    private var last_z: Float = 0f
 //    private var SHAKE_THRESHOLD = 600
 
-    private lateinit var openGLRenderer: OpenGLRenderer
+    private lateinit var renderer: GameRenderer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        openGLRenderer = OpenGLRenderer(this)
-        glView.setEGLContextClientVersion(2)
-        glView.setRenderer(openGLRenderer)
+        renderer = GameRenderer(this)
+        glView.setRenderer(renderer)
 
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
@@ -41,21 +40,25 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     }
 
     override fun onSensorChanged(event: SensorEvent) {
+//Log.i("poke...", "poke")
         if (event.sensor.type == Sensor.TYPE_ACCELEROMETER) {
             val curTime = System.currentTimeMillis()
-            if (curTime - lastUpdate > 1000 / 24) {
                 val x = event.values[0]
                 val y = event.values[1]
                 val z = event.values[2]
 
                 helloBox.text = String.format(Locale.getDefault(), "%.3f %.3f %.3f", x, y, z)
+            renderer.monk.destinationX = -x
+            renderer.monk.destinationY = -y
+//                renderer.monk2.currentX = -x
+//                renderer.monk2.currentY = -y
 //                val diffTime = curTime - lastUpdate
-//                lastUpdate = curTime
+            lastUpdate = curTime
 //                //val speed = Math.abs(x + y + z - last_x - last_y - last_z) / diffTime * 10000
 //                last_x = x
 //                last_y = y
 //                last_z = z
-            }
+
         }
     }
 
