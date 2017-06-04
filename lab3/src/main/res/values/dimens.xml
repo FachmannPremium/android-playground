@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="text_h1">30sp</dimen>
+    <dimen name="about_author_face_size">200dp</dimen>
+    <dimen name="about_background_height">280dp</dimen>
+    <dimen name="about_author_size">10sp</dimen>
+    <dimen name="about_author_name_sie">25sp</dimen>
+    <dimen name="about_table_text_padding">7dp</dimen>
+    <dimen name="standard_margin">10dp</dimen>
+</resources>

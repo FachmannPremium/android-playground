@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menuLevel"
+        android:title="@string/change_level">
+        <menu>
+            <group
+                android:id="@+id/levelMenuGroup"
+                android:checkableBehavior="single">
+                <!--<item-->
+                <!--android:id="@+id/menu_use_metric"-->
+                <!--android:title="@string/unit_metric" />-->
+                <!--<item-->
+                <!--android:id="@+id/menu_use_imperial"-->
+                <!--android:title="@string/unit_imperial" />-->
+            </group>
+        </menu>
+    </item>
+    <item
+        android:id="@+id/menu_about"
+        android:title="@string/menu_about" />
+</menu>

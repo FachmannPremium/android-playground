@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="lt.ro.fachmann.wasserwaga.view.AboutActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/aboutBackgroundImage"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/about_background_height"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/background" />
+
+        <ImageView
+            android:id="@+id/aboutFaceImage"
+            android:layout_width="@dimen/about_author_face_size"
+            android:layout_height="@dimen/about_author_face_size"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="@dimen/standard_margin"
+            android:onClick="openPersonalSite"
+            android:rotation="180"
+            android:src="@drawable/img" />
+
+        <TextView
+            android:id="@+id/authorText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/aboutFaceImage"
+            android:layout_centerHorizontal="true"
+            android:text="@string/about_autor"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/about_author_size" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/authorText"
+            android:layout_centerHorizontal="true"
+            android:onClick="openPersonalSite"
+            android:text="@string/about_author_name"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/about_author_name_sie" />
+
+        <ImageView
+            android:id="@+id/aboutIconImage"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_below="@id/aboutBackgroundImage"
+            android:layout_margin="@dimen/standard_margin"
+            android:src="@mipmap/ic_launcher" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_alignBottom="@id/aboutIconImage"
+            android:layout_toEndOf="@id/aboutIconImage"
+            android:gravity="center"
+            android:text="@string/app_name"
+            android:textSize="@dimen/text_h1" />
+
+        <TextView
+            android:id="@+id/aboutSiteText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/aboutIconImage"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/standard_margin"
+            android:onClick="openPersonalSite"
+            android:text="@string/about_site" />
+
+        <TextView
+            android:id="@+id/versionText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/aboutSiteText"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/standard_margin"
+            android:text="@string/about_version" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@id/versionText"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/standard_margin"
+            android:text="@string/about_production_year" />
+    </RelativeLayout>
+</ScrollView>
