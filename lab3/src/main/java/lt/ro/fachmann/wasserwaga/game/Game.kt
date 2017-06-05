@@ -5,12 +5,14 @@ import android.view.MotionEvent
 import android.widget.TextView
 import lt.ro.fachmann.wasserwaga.R
 import lt.ro.fachmann.wasserwaga.gl.TexturedRectangle
+import org.jetbrains.anko.runOnUiThread
+import java.util.*
 import javax.microedition.khronos.opengles.GL10
 
 /**
  * Created by bartl on 04.06.2017.
  */
-class Game(context: Context, val fromStart: TextView) {
+class Game(val context: Context, val fromStart: TextView) {
     val levels = arrayOf(
             Level(context.getString(R.string.level_0), 0.0, 0.0, true),
             Level(context.getString(R.string.level_1), 0.015, 0.05),
@@ -52,6 +54,10 @@ class Game(context: Context, val fromStart: TextView) {
         monk.render(gl)
         if (System.currentTimeMillis() < infoTill) {
             gameOver.render(gl)
+        } else {
+            context.runOnUiThread {
+                fromStart.text = String.format(Locale.getDefault(), " %.2f s", (System.currentTimeMillis() - monk.startMillis) / 1000.0f)
+            }
         }
     }
 

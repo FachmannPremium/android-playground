@@ -60,9 +60,6 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
     override fun onSensorChanged(event: SensorEvent) {
         val millis = System.currentTimeMillis()
-        if (millis > game.infoTill) {
-            fromStart.text = String.format(Locale.getDefault(), " %.2f s", (millis - game.monk.startMillis) / 1000.0f)
-        }
         if (event.sensor.type == Sensor.TYPE_ACCELEROMETER) {
             val curTime = millis
             if (curTime - lastUpdate > REFRESH_RATE) {
