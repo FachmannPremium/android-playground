@@ -14,6 +14,7 @@ import lt.ro.fachmann.wasserwaga.R
 import lt.ro.fachmann.wasserwaga.game.Game
 import lt.ro.fachmann.wasserwaga.game.Level
 import lt.ro.fachmann.wasserwaga.gl.GameRenderer
+import org.jetbrains.anko.onTouch
 import org.jetbrains.anko.startActivity
 import java.util.*
 
@@ -36,13 +37,16 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        //window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 
-        game = Game(this)
+        game = Game(this, fromStart)
         setLevel(game.levels[2])
 
         renderer = GameRenderer(game, this)
         glView.setRenderer(renderer)
+        glView.onTouch { view, motionEvent ->
+            game.touch(motionEvent)
+            true
+        }
 
 
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
@@ -55,8 +59,12 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     }
 
     override fun onSensorChanged(event: SensorEvent) {
+        val millis = System.currentTimeMillis()
+        if (millis > game.infoTill) {
+            fromStart.text = String.format(Locale.getDefault(), " %.2f s", (millis - game.monk.startMillis) / 1000.0f)
+        }
         if (event.sensor.type == Sensor.TYPE_ACCELEROMETER) {
-            val curTime = System.currentTimeMillis()
+            val curTime = millis
             if (curTime - lastUpdate > REFRESH_RATE) {
                 val x = event.values[0]
                 val y = event.values[1]

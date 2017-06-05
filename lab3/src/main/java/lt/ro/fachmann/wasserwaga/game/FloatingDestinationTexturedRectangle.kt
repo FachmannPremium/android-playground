@@ -28,6 +28,7 @@ class FloatingDestinationTexturedRectangle(@DrawableRes resId: Int, width: Float
         var shiftRadius = radiusNoise.next(fromStartSeconds) - 3.0
         if (fromStartSeconds < 5.0) {
             shiftRadius /= 6.0 - fromStartSeconds
+            //Log.i("poke", "${6.0 - fromStartSeconds }")
         }
 
         val shiftX = (shiftRadius * Math.cos(shiftAngle)).toFloat()

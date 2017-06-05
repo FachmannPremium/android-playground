@@ -1,6 +1,8 @@
 package lt.ro.fachmann.wasserwaga.game
 
 import android.content.Context
+import android.view.MotionEvent
+import android.widget.TextView
 import lt.ro.fachmann.wasserwaga.R
 import lt.ro.fachmann.wasserwaga.gl.TexturedRectangle
 import javax.microedition.khronos.opengles.GL10
@@ -8,7 +10,7 @@ import javax.microedition.khronos.opengles.GL10
 /**
  * Created by bartl on 04.06.2017.
  */
-class Game(context: Context) {
+class Game(context: Context, val fromStart: TextView) {
     val levels = arrayOf(
             Level(context.getString(R.string.level_0), 0.0, 0.0, true),
             Level(context.getString(R.string.level_1), 0.015, 0.05),
@@ -63,5 +65,13 @@ class Game(context: Context) {
     fun setLevel(level: Level) {
         monk.setLevel(level)
         monk.reset()
+    }
+
+    fun touch(event: MotionEvent) {
+        val currentTimeMillis = System.currentTimeMillis()
+        if (infoTill > currentTimeMillis) {
+            infoTill = currentTimeMillis - 1
+            monk.reset()
+        }
     }
 }
