@@ -32,7 +32,7 @@
             android:layout_marginStart="@dimen/intro_horizontal_spacing"
             android:layout_marginTop="@dimen/intro_vertical_spacing"
             android:alpha="1.0"
-            android:gravity="center|startMillis"
+            android:gravity="center|start"
             android:text="@string/intro_label_ask_mass" />
 
         <EditText
@@ -54,7 +54,7 @@
             android:layout_height="@dimen/form_height"
             android:layout_below="@id/edit_mass"
             android:layout_marginStart="@dimen/intro_horizontal_spacing"
-            android:gravity="center|startMillis"
+            android:gravity="center|start"
             android:text="@string/intro_label_ask_heigth" />
 
         <EditText

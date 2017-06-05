@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Mnich Michał</string>
+
+    <string name="about_label">O programie</string>
+    <string name="about_autor">AUTOR</string>
+    <string name="about_version">Wersja 1.0</string>
+
+    <string name="share_error">Brak aplikacji obsługującej URL</string>
+    <string name="change_level">Zmień poziom</string>
+
+    <string name="level_0">Brak</string>
+    <string name="level_1">Łatwy</string>
+    <string name="level_2">Średni</string>
+    <string name="level_3">Cinżki</string>
+    <string name="level_4">Bist du verrückt?</string>
+    <string name="menu_free_mode">Tryb wolny</string>
+</resources>

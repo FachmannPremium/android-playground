@@ -20,7 +20,7 @@ import java.util.*
 
 class MainActivity : AppCompatActivity(), SensorEventListener {
     companion object {
-        val REFRESH_RATE = 15
+        val REFRESH_RATE = 19
     }
 
     lateinit var sensorManager: SensorManager
@@ -56,14 +56,11 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
     override fun onSensorChanged(event: SensorEvent) {
         if (event.sensor.type == Sensor.TYPE_ACCELEROMETER) {
-//            Log.i("poke", "Pokelllasd")
             val curTime = System.currentTimeMillis()
             if (curTime - lastUpdate > REFRESH_RATE) {
                 val x = event.values[0]
                 val y = event.values[1]
-                val z = event.values[2]
 
-                helloBox.text = String.format(Locale.getDefault(), "%.3f %.3f %.3f", x, y, z)
                 game.updateSensorReading(x, y)
                 lastUpdate = curTime
             }
@@ -72,17 +69,24 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
-        val levelMenuGroup = menu.getItem(0).subMenu
+
+        val levelMenuGroup = menu.findItem(R.id.menu_level).subMenu
         for (level in game.levels) {
             val menuItem = levelMenuGroup.add(level.name)
             levelMap.put(menuItem, level)
         }
+
+        menu.findItem(R.id.menu_free_mode).isChecked = game.freeMode
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.menu_about) {
             startActivity<AboutActivity>()
+            return true
+        } else if (item.itemId == R.id.menu_free_mode) {
+            game.freeMode = !game.freeMode
+            item.isChecked = game.freeMode
             return true
         } else if (levelMap.contains(item)) {
             val level = levelMap[item]

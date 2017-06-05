@@ -5,7 +5,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.view.View
 import android.view.animation.AccelerateInterpolator
 import kotlinx.android.synthetic.main.activity_about.*
 import lt.ro.fachmann.wasserwaga.R
@@ -25,7 +24,7 @@ class AboutActivity : AppCompatActivity() {
         //toast = Toast.makeText(applicationContext, "", Toast.LENGTH_LONG)
     }
 
-    fun openPersonalSite(view: View) {
+    fun openPersonalSite() {
         try {
             val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.about_site)))
             startActivity(browserIntent)

@@ -1,7 +1,6 @@
 package lt.ro.fachmann.wasserwaga.game
 
 import android.support.annotation.DrawableRes
-import android.util.Log
 import lt.ro.fachmann.wasserwaga.util.Noise1DLimited
 import lt.ro.fachmann.wasserwaga.util.Noise1DUnlimited
 
@@ -24,12 +23,16 @@ class FloatingDestinationTexturedRectangle(@DrawableRes resId: Int, width: Float
     var floating = true
 
     override fun update() {
-        val fromStart = System.currentTimeMillis() - startMillis
-        val shiftAngle = angleNoise.next(fromStart.toDouble() / 1000)
-        val shiftRadius = radiusNoise.next(fromStart.toDouble() / 1000) - 3.0
-        var shiftX = (shiftRadius * Math.cos(shiftAngle)).toFloat()
-        var shiftY = (shiftRadius * Math.sin(shiftAngle)).toFloat()
-        Log.i("poke", fromStart.toString())
+        val fromStartSeconds = (System.currentTimeMillis() - startMillis).toDouble() / 1000.0
+        val shiftAngle = angleNoise.next(fromStartSeconds)
+        var shiftRadius = radiusNoise.next(fromStartSeconds) - 3.0
+        if (fromStartSeconds < 5.0) {
+            shiftRadius /= 6.0 - fromStartSeconds
+        }
+
+        val shiftX = (shiftRadius * Math.cos(shiftAngle)).toFloat()
+        val shiftY = (shiftRadius * Math.sin(shiftAngle)).toFloat()
+        //Log.i("poke", fromStartSeconds.toString())
 //        val dY = (destinationY - currentY).toDouble()
 //        val dX = (destinationX - currentX).toDouble()
 //        val destAngle = Math.atan2(dY, dX)
@@ -63,9 +66,9 @@ class FloatingDestinationTexturedRectangle(@DrawableRes resId: Int, width: Float
         radiusNoise.scale = level.radiusScale
     }
 
-    fun reset() {
+    fun reset(delay: Int = 0) {
         currentX = 0.0f
         currentY = 0.0f
-        startMillis = System.currentTimeMillis()
+        startMillis = System.currentTimeMillis() + delay
     }
 }

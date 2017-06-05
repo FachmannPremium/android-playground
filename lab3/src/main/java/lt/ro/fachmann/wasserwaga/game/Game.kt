@@ -2,7 +2,6 @@ package lt.ro.fachmann.wasserwaga.game
 
 import android.content.Context
 import lt.ro.fachmann.wasserwaga.R
-import lt.ro.fachmann.wasserwaga.gl.GameRenderer
 import lt.ro.fachmann.wasserwaga.gl.TexturedRectangle
 import javax.microedition.khronos.opengles.GL10
 
@@ -20,24 +19,25 @@ class Game(context: Context) {
     val monk = FloatingDestinationTexturedRectangle(R.drawable.monk)
     val background = DestinationTexturedRectangle(R.drawable.game_background, 3.5f, 7.0f)
     val arena = TexturedRectangle(R.drawable.arena, 2.0f, 2.0f)
-
     val gameOver = TexturedRectangle(R.drawable.game_over, 2.0f, 0.5f)
-    var infoTill = 0L
 
+    var infoTill = 0L
+    var freeMode = false
 
     fun enable(gl: GL10, context: Context) {
         monk.loadGLTexture(gl, context)
         background.loadGLTexture(gl, context)
-        gameOver.loadGLTexture(gl, context)
         arena.loadGLTexture(gl, context)
+        gameOver.loadGLTexture(gl, context)
+        gameOver.y = 3.0f
     }
 
     fun update() {
         val currentTimeMillis = System.currentTimeMillis()
         if (infoTill <= currentTimeMillis) {
             monk.update()
-            if (monk.radiusFromMiddle() >= 1.2) {
-                monk.reset()
+            if (!freeMode && monk.radiusFromMiddle() >= 1.2) {
+                monk.reset(3000)
                 infoTill = currentTimeMillis + 3000
             }
         }
@@ -49,7 +49,6 @@ class Game(context: Context) {
         arena.render(gl)
         monk.render(gl)
         if (System.currentTimeMillis() < infoTill) {
-            gl.glTranslatef(0.0f, -3.0f, GameRenderer.DRAW_LAYER)
             gameOver.render(gl)
         }
     }
@@ -63,5 +62,6 @@ class Game(context: Context) {
 
     fun setLevel(level: Level) {
         monk.setLevel(level)
+        monk.reset()
     }
 }
