@@ -9,12 +9,7 @@ import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
 
-/**
- * Created by bartl on 30.05.2017.
- */
-
-
-class GameRenderer(val game: Game, private val context: Context) : GLSurfaceView.Renderer {
+class GameRenderer(val game: Game) : GLSurfaceView.Renderer {
     companion object {
         val DRAW_LAYER = -10.0f
     }
@@ -44,7 +39,7 @@ class GameRenderer(val game: Game, private val context: Context) : GLSurfaceView
     }
 
     override fun onSurfaceCreated(gl: GL10, config: EGLConfig) {
-        game.enable(gl, context)
+        game.enable(gl)
 
         gl.glDepthFunc(GL10.GL_NEVER)
 

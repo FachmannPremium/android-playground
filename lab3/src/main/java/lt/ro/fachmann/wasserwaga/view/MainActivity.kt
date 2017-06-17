@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         game = Game(this, fromStart)
         setLevel(game.levels[2])
 
-        renderer = GameRenderer(game, this)
+        renderer = GameRenderer(game)
         glView.setRenderer(renderer)
         glView.onTouch { view, motionEvent ->
             game.touch(motionEvent)

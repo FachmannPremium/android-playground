@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="lt.ro.fachmann.lab4.SongListActivity">
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/songRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:scrollbars="vertical" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/bottomPlayerView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/popup_height"
+        android:layout_weight="1"
+        android:visibility="gone"
+        android:background="@color/colorPrimary"
+        android:onClick="showDetails">
+
+        <ImageButton
+            android:id="@+id/nextPopup"
+            android:layout_width="@dimen/list_popup_icon_size"
+            android:layout_height="@dimen/list_popup_icon_size"
+            android:layout_marginEnd="@dimen/standard_margin"
+            android:background="@null"
+            android:scaleType="fitCenter"
+            android:onClick="next"
+            android:src="@drawable/ic_next_circle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/playPausePopup"
+            android:layout_width="@dimen/list_popup_icon_size"
+            android:layout_height="@dimen/list_popup_icon_size"
+            android:layout_marginEnd="@dimen/standard_margin"
+            android:background="@null"
+            android:onClick="play"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_play_circle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/nextPopup"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/titlePopup"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/standard_margin"
+            android:layout_marginStart="@dimen/standard_margin"
+            android:ellipsize="marquee"
+            android:fadingEdge="horizontal"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
+            android:textColor="@color/iconColor"
+            android:textSize="@dimen/h2_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/playPausePopup"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+
+
+</LinearLayout>

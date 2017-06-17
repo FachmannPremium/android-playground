@@ -15,9 +15,9 @@ import javax.microedition.khronos.opengles.GL10
 class Game(val context: Context, val fromStart: TextView) {
     val levels = arrayOf(
             Level(context.getString(R.string.level_0), 0.0, 0.0, true),
-            Level(context.getString(R.string.level_1), 0.015, 0.05),
-            Level(context.getString(R.string.level_2), 0.02, 0.15),
-            Level(context.getString(R.string.level_3), 0.03, 0.25),
+            Level(context.getString(R.string.level_1), 0.02, 0.15),
+            Level(context.getString(R.string.level_2), 0.03, 0.25),
+            Level(context.getString(R.string.level_3), 0.05, 0.4),
             Level(context.getString(R.string.level_4), 0.07, 0.85))
 
     val monk = FloatingDestinationTexturedRectangle(R.drawable.monk)
@@ -28,7 +28,7 @@ class Game(val context: Context, val fromStart: TextView) {
     var infoTill = 0L
     var freeMode = false
 
-    fun enable(gl: GL10, context: Context) {
+    fun enable(gl: GL10) {
         monk.loadGLTexture(gl, context)
         background.loadGLTexture(gl, context)
         arena.loadGLTexture(gl, context)

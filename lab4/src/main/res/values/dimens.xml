@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="circle_icon_padding">2dp</dimen>
+    <dimen name="list_popup_icon_size">35dp</dimen>
+    <dimen name="cover_size_row">50dp</dimen>
+    <dimen name="standard_margin">8dp</dimen>
+    <dimen name="h2_size">20sp</dimen>
+    <dimen name="popup_height">120dp</dimen>
+    <dimen name="details_icon_big">70dp</dimen>
+    <dimen name="details_icon_medium">50dp</dimen>
+    <dimen name="spacing_details">16dp</dimen>
+</resources>

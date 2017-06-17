@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?android:attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
+    android:padding="10dp">
+
+    <ImageView
+        android:id="@+id/coverRow"
+        android:layout_width="@dimen/cover_size_row"
+        android:layout_height="@dimen/cover_size_row" />
+
+    <TextView
+        android:id="@+id/titleRow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/standard_margin"
+        android:layout_toEndOf="@+id/coverRow"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textSize="@dimen/h2_size" />
+
+    <TextView
+        android:id="@+id/albumRow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/coverRow"
+        android:layout_alignParentEnd="true"
+        android:ellipsize="end"
+        android:maxLines="1" />
+
+    <TextView
+
+        android:id="@+id/artistRow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/coverRow"
+        android:layout_marginStart="@dimen/standard_margin"
+        android:layout_toEndOf="@+id/coverRow"
+        android:layout_toStartOf="@id/albumRow"
+        android:ellipsize="end"
+        android:maxLines="1" />
+</RelativeLayout>
