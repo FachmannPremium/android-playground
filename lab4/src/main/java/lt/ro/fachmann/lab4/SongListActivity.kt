@@ -1,30 +1,26 @@
 package lt.ro.fachmann.lab4
 
 import android.Manifest
-import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.content.ComponentName
 import android.content.Context
-import android.os.IBinder
-import android.content.ServiceConnection
 import android.content.Intent
+import android.content.ServiceConnection
 import android.content.pm.PackageManager
-import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
+import android.os.Bundle
+import android.os.IBinder
 import android.provider.MediaStore
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import kotlinx.android.synthetic.main.activity_music_list.*
 import org.jetbrains.anko.imageResource
 import org.jetbrains.anko.startActivity
-import java.util.ArrayList
+import java.util.*
 
 
 class SongListActivity : AppCompatActivity() {
@@ -35,42 +31,26 @@ class SongListActivity : AppCompatActivity() {
 
     lateinit var adapter: SongListAdapter
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_music_list)
-        initService()
         bindService()
-        initSongRecyclerView()
         titlePopup.isSelected = true
     }
 
-
     override fun onDestroy() {
-        unbindService(serviceConnection)
-        val startIntent = Intent(this, MusicService::class.java)
-        stopService(startIntent)
+        if (isFinishing) {
+            unbindService(serviceConnection)
+            val startIntent = Intent(this, MusicService::class.java)
+            stopService(startIntent)
+        }
         super.onDestroy()
     }
 
     private val serviceConnection = object : ServiceConnection {
         override fun onServiceConnected(name: ComponentName, service: IBinder) {
             val binder = service as MusicService.MusicServiceBinder
-            musicService = binder.service
-            musicService.songList = adapter.songList
-            musicService.addOnSongChangeListener(object : MusicService.OnSongChangeListener {
-                override fun onSongChange(song: Song) {
-                    titlePopup.text = song.title
-                }
-
-                override fun onPause() {
-                    playPausePopup.imageResource = R.drawable.ic_play_circle
-                }
-
-                override fun onPlay() {
-                    playPausePopup.imageResource = R.drawable.ic_pause_circle
-                }
-            })
+            initMusicService(binder.service)
             serviceBound = true
         }
 
@@ -100,18 +80,45 @@ class SongListActivity : AppCompatActivity() {
         startActivity<DetailsActivity>()
     }
 
-    fun initService() {
-        val startIntent = Intent(this, MusicService::class.java)
-        startService(startIntent)
-    }
-
     fun bindService() {
         val bindIntent = Intent(this, MusicService::class.java)
         bindService(bindIntent, serviceConnection, Context.BIND_AUTO_CREATE)
     }
 
-    fun initSongRecyclerView() {
-        val songList = if (checkAndRequestPermissions()) loadAudioList() else ArrayList<Song>()
+    fun initMusicService(service: MusicService) {
+        musicService = service
+
+        val songList =
+                if (musicService.songListInitialized) musicService.songList
+                else if (checkAndRequestPermissions()) loadAudioList()
+                else ArrayList<Song>()
+
+        if (!musicService.songListInitialized) {
+            musicService.songList = songList
+            musicService.songListInitialized = true
+        } else {
+            bottomPlayerView.visibility = View.VISIBLE
+            titlePopup.text = musicService.currentSong().title
+            playPausePopup.imageResource = if (musicService.isPlaying()) R.drawable.ic_pause_circle else R.drawable.ic_play_circle
+        }
+        initSongRecyclerView(songList)
+
+        musicService.addOnSongChangeListener(object : MusicService.OnSongChangeListener {
+            override fun onSongChange(song: Song) {
+                titlePopup.text = song.title
+            }
+
+            override fun onPause() {
+                playPausePopup.imageResource = R.drawable.ic_play_circle
+            }
+
+            override fun onPlay() {
+                playPausePopup.imageResource = R.drawable.ic_pause_circle
+            }
+        })
+    }
+
+    fun initSongRecyclerView(songList: List<Song>) {
         adapter = SongListAdapter(songList) {
             selectSong(it)
         }
@@ -127,7 +134,7 @@ class SongListActivity : AppCompatActivity() {
         val externalContentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
         //val selection = "${MediaStore.Audio.Media.IS_MUSIC} != 0 AND ${MediaStore.Audio.Media.DATA} LIKE '/storage/9016-4EF8/Muzyka/'"
 
-        val folder = "/storage/9016-4EF8/Muzyka"
+        val folder = "/" //"/storage/9016-4EF8/Muzyka"
         val selection = "${MediaStore.Audio.Media.IS_MUSIC} != 0 AND ${MediaStore.Audio.Media.DATA} LIKE ?"
         val selectionArgs = arrayOf("%$folder%")
 

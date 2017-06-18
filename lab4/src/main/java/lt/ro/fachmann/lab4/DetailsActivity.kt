@@ -4,13 +4,10 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.media.MediaMetadataRetriever
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.IBinder
+import android.support.v7.app.AppCompatActivity
 import android.support.v8.renderscript.Allocation
 import android.support.v8.renderscript.Element
 import android.support.v8.renderscript.RenderScript
@@ -18,7 +15,6 @@ import android.support.v8.renderscript.ScriptIntrinsicBlur
 import android.view.View
 import android.widget.SeekBar
 import kotlinx.android.synthetic.main.activity_details.*
-import kotlinx.android.synthetic.main.activity_music_list.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.imageResource
 import org.jetbrains.anko.uiThread
@@ -34,6 +30,7 @@ class DetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
         bindService()
+        titleDetails.isSelected = true
     }
 
     override fun onDestroy() {
@@ -47,7 +44,6 @@ class DetailsActivity : AppCompatActivity() {
             titleDetails.text = currentSong?.title
             albumDetails.text = currentSong?.album
             artistDetails.text = currentSong?.artist
-            //musicService.offset = 0
 
             playPauseDetails.imageResource =
                     if (musicService.isPlaying())
@@ -71,7 +67,7 @@ class DetailsActivity : AppCompatActivity() {
                     coverDetails.setImageBitmap(coverBitmap)
                     coverBackgroundDetails.setImageBitmap(coverBitmapBlurred)
                     songOffsetDetails.max = musicService.duration
-                    songOffsetDetails.progress = 0
+                    songOffsetDetails.progress = musicService.offset
                 }
             }
         }
@@ -99,7 +95,6 @@ class DetailsActivity : AppCompatActivity() {
         })
         currentSong = musicService.currentSong()
         refreshView()
-
         val offsetHandler = Handler()
         runOnUiThread(object : Runnable {
             override fun run() {
