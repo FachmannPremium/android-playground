@@ -93,6 +93,7 @@ class SongListActivity : AppCompatActivity() {
                 else if (checkAndRequestPermissions()) loadAudioList()
                 else ArrayList<Song>()
 
+
         if (!musicService.songListInitialized) {
             musicService.songList = songList
             musicService.songListInitialized = true
@@ -132,8 +133,6 @@ class SongListActivity : AppCompatActivity() {
         val audioList = ArrayList<Song>()
 
         val externalContentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
-        //val selection = "${MediaStore.Audio.Media.IS_MUSIC} != 0 AND ${MediaStore.Audio.Media.DATA} LIKE '/storage/9016-4EF8/Muzyka/'"
-
         val folder = "/" //"/storage/9016-4EF8/Muzyka"
         val selection = "${MediaStore.Audio.Media.IS_MUSIC} != 0 AND ${MediaStore.Audio.Media.DATA} LIKE ?"
         val selectionArgs = arrayOf("%$folder%")
@@ -169,11 +168,9 @@ class SongListActivity : AppCompatActivity() {
             if (!listPermissionsNeeded.isEmpty()) {
                 ActivityCompat.requestPermissions(this, listPermissionsNeeded.toTypedArray(), REQUEST_ID_MULTIPLE_PERMISSIONS)
                 return false
-            } else {
-                return true
             }
         }
-        return false
+        return true
     }
 }
 
