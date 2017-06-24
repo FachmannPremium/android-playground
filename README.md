@@ -1,16 +1,25 @@
-#Systemy wbudowane i mobilne
-Bartłomiej Wierciński 2017
+# Personal Android Playground
+The best way to learn new stuff is to train it, .. or be forced by university.
 
-227987
+> Bartłomiej Wierciński 2017
 
-##Moduł: Lab1 - Kalkulator BMI
+## Module: `Lab1` - BMI Calculator
 
-##Moduł: Lab2 - Filmy
+ButterKnife
+SharedPreferences
+Animations
 
-# Instalacja
+## Module: `Lab2` - Movies
 
-nic niż tylko
+Kotlin
+RecyclerView
 
-```
-git clone http://fachmann.ro.lt:8081/git/szkola/swimAndroid.git
-```
+## Module: `Lab3` - Sensor game
+
+Kotlin
+OpenGL
+
+## Module: `Lab4` - Music player
+
+Kotlin
+Services
